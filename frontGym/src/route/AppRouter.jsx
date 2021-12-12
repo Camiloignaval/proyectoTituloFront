@@ -4,7 +4,6 @@ import { DashboardAdmin } from "../components/admin/DashboardAdmin";
 import { Solicitudes } from "../components/admin/Solicitudes";
 import { LoginScreen } from "../components/auth/LoginScreen";
 import { RegisterScreen } from "../components/auth/RegisterScreen";
-import { Nav } from "../components/ui/Nav";
 import { WelcomeScreen } from "../components/WelcomeScreen";
 
 export const AppRouter = () => {

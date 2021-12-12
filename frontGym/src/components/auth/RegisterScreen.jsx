@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -52,7 +52,12 @@ export const RegisterScreen = () => {
 		if (!validateRUT(data.rut)) {
 			document.querySelector(".eRut").innerHTML = "Rut inválido";
 		} else {
+			try {
+			} catch (error) {
+				console.log(error);
+			}
 			// Enviar datos a api
+			enviarSolicitud(data);
 			Swal.fire(
 				"Solicitud enviada",
 				"Nos contactaremos con usted a la brevedad",
@@ -60,6 +65,17 @@ export const RegisterScreen = () => {
 			);
 			navigate("/");
 		}
+	};
+
+	const enviarSolicitud = async (datos) => {
+		fetch("http://localhost:4000/api/auth/register", {
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			method: "POST",
+			body: JSON.stringify(datos),
+		});
 	};
 
 	return (
