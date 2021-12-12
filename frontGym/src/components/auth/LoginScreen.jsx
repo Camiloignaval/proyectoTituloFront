@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Navigate } from "react-router-dom";
+import { Nav } from "../ui/Nav";
 
 export const LoginScreen = () => {
 	// validaciones con yup
@@ -28,57 +29,63 @@ export const LoginScreen = () => {
 	const onSubmit = (data) => console.log(data);
 
 	return (
-		<div className='container mt-5'>
-			<div className='d-flex justify-content-center h-100'>
-				<div className='card'>
-					<div className='card-header'>
-						<h3>Iniciar sesión</h3>
-					</div>
-					<div className='card-body'>
-						<form onSubmit={handleSubmit(onSubmit)}>
-							<div className='input-group form-group'>
-								<div className='input-group-prepend'>
-									<span className='input-group-text'>
-										<i className='fas fa-user'></i>
-									</span>
+		<>
+			<Nav />
+			<div className='container mt-5'>
+				<div className='d-flex justify-content-center h-100'>
+					<div className='card'>
+						<div className='card-header'>
+							<h3>Iniciar sesión</h3>
+						</div>
+						<div className='card-body'>
+							<form onSubmit={handleSubmit(onSubmit)}>
+								<div className='input-group form-group'>
+									<div className='input-group-prepend'>
+										<span className='input-group-text'>
+											<i className='fas fa-user'></i>
+										</span>
+									</div>
+									{/* Nombre usuario */}
+									<input
+										type='text'
+										className='form-control'
+										placeholder='email'
+										{...register("email")}
+									/>
+									<p className='w-100 error'>{errors.email?.message}</p>
 								</div>
-								{/* Nombre usuario */}
-								<input
-									type='text'
-									className='form-control'
-									placeholder='email'
-									{...register("email")}
-								/>
-								<p className='w-100 error'>{errors.email?.message}</p>
-							</div>
-							<div className='input-group form-group'>
-								<div className='input-group-prepend'>
-									<span className='input-group-text'>
-										<i className='fas fa-key'></i>
-									</span>
+								<div className='input-group form-group'>
+									<div className='input-group-prepend'>
+										<span className='input-group-text'>
+											<i className='fas fa-key'></i>
+										</span>
+									</div>
+									{/* password */}
+									<input
+										type='password'
+										className='form-control'
+										placeholder='password'
+										{...register("password")}
+									/>
+									<p className='w-100 error'>{errors.password?.message}</p>
 								</div>
-								{/* password */}
-								<input
-									type='password'
-									className='form-control'
-									placeholder='password'
-									{...register("password")}
-								/>
-								<p className='w-100 error'>{errors.password?.message}</p>
-							</div>
-							<div className='form-group'>
-								<button type='submit' className='btn btn-block login_btn mt-4'>
-									Entrar
-								</button>
-								<div className='d-flex justify-content-end links my-4'>
-									No tienes cuenta?
-									<Link to='/register'>Click aqui!</Link>
+								<div className='form-group'>
+									<button
+										type='submit'
+										className='btn btn-block login_btn mt-4'
+									>
+										Entrar
+									</button>
+									<div className='d-flex justify-content-end links my-4'>
+										No tienes cuenta?
+										<Link to='/register'>Click aqui!</Link>
+									</div>
 								</div>
-							</div>
-						</form>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };

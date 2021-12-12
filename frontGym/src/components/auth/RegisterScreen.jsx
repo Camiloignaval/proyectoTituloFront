@@ -6,6 +6,7 @@ import { validateRUT } from "validar-rut";
 // import swal from "sweetalert2";
 import Swal from "sweetalert2/dist/sweetalert2.all.min.js";
 import { useNavigate } from "react-router-dom";
+import { Nav } from "../ui/Nav";
 
 export const RegisterScreen = () => {
 	const navigate = useNavigate();
@@ -63,6 +64,7 @@ export const RegisterScreen = () => {
 
 	return (
 		<>
+			<Nav />
 			<div className='container mt-5'>
 				<div className='d-flex justify-content-center h-100'>
 					<div className='card'>

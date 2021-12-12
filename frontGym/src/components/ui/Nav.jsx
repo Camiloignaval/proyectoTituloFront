@@ -33,7 +33,7 @@ export const Nav = () => {
 						</li>
 						<li className='nav-item  mx-2'>
 							<NavLink
-								to='login'
+								to='/login'
 								className={({ isActive }) => (isActive ? "nav-active" : "")}
 							>
 								Iniciar sesión
@@ -41,7 +41,7 @@ export const Nav = () => {
 						</li>
 						<li className='nav-item'>
 							<NavLink
-								to='register'
+								to='/register'
 								className={({ isActive }) => (isActive ? "nav-active" : "")}
 							>
 								Registrar
