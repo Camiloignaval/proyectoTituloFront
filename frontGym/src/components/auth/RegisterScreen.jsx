@@ -7,6 +7,7 @@ import { validateRUT } from "validar-rut";
 import Swal from "sweetalert2/dist/sweetalert2.all.min.js";
 import { useNavigate } from "react-router-dom";
 import { Nav } from "../ui/Nav";
+import { RegionesYcomunas } from "../../Comunas/comunas";
 
 export const RegisterScreen = () => {
 	const navigate = useNavigate();
@@ -37,6 +38,8 @@ export const RegisterScreen = () => {
 			rut: yup.string().required("Rut es requerido"),
 			adress: yup.string().required("Diurección es requerida"),
 			date: yup.string().required("Fecha de nacimiento es requerida"),
+			region: yup.string().required("Favor escoger región"),
+			comuna: yup.string().required("Favor escoger comuna"),
 		})
 		.required();
 
@@ -49,6 +52,7 @@ export const RegisterScreen = () => {
 	});
 
 	const onSubmit = (data) => {
+		console.log(data);
 		if (!validateRUT(data.rut)) {
 			document.querySelector(".eRut").innerHTML = "Rut inválido";
 		} else {
@@ -77,6 +81,69 @@ export const RegisterScreen = () => {
 			body: JSON.stringify(datos),
 		});
 	};
+
+	// Funciones para regiones y comunas
+
+	jQuery(document).ready(function () {
+		var iRegion = 0;
+		var htmlRegion =
+			'<option value="sin-region">Seleccione región</option><option value="sin-region">--</option>';
+		var htmlComunas =
+			'<option value="sin-region">Seleccione comuna</option><option value="sin-region">--</option>';
+
+		jQuery.each(RegionesYcomunas.regiones, function () {
+			htmlRegion =
+				htmlRegion +
+				'<option value="' +
+				RegionesYcomunas.regiones[iRegion].NombreRegion +
+				'">' +
+				RegionesYcomunas.regiones[iRegion].NombreRegion +
+				"</option>";
+			iRegion++;
+		});
+
+		jQuery("#regiones").html(htmlRegion);
+		jQuery("#comunas").html(htmlComunas);
+
+		jQuery("#regiones").change(function () {
+			var iRegiones = 0;
+			var valorRegion = jQuery(this).val();
+			var htmlComuna =
+				'<option value="sin-comuna">Seleccione comuna</option><option value="sin-comuna">--</option>';
+			jQuery.each(RegionesYcomunas.regiones, function () {
+				if (RegionesYcomunas.regiones[iRegiones].NombreRegion == valorRegion) {
+					var iComunas = 0;
+					jQuery.each(
+						RegionesYcomunas.regiones[iRegiones].comunas,
+						function () {
+							htmlComuna =
+								htmlComuna +
+								'<option value="' +
+								RegionesYcomunas.regiones[iRegiones].comunas[iComunas] +
+								'">' +
+								RegionesYcomunas.regiones[iRegiones].comunas[iComunas] +
+								"</option>";
+							iComunas++;
+						},
+					);
+				}
+				iRegiones++;
+			});
+			jQuery("#comunas").html(htmlComuna);
+		});
+		jQuery("#comunas").change(function () {
+			if (jQuery(this).val() == "sin-region") {
+				alert("selecciones Región");
+			} else if (jQuery(this).val() == "sin-comuna") {
+				alert("selecciones Comuna");
+			}
+		});
+		jQuery("#regiones").change(function () {
+			if (jQuery(this).val() == "sin-region") {
+				alert("selecciones Región");
+			}
+		});
+	});
 
 	return (
 		<>
@@ -144,10 +211,30 @@ export const RegisterScreen = () => {
 									<input
 										type='text'
 										className='form-control'
-										placeholder='Ingresa tu direccion'
+										placeholder='Ingrese calle y número'
 										{...register("adress")}
 									/>
 									<p className='w-100 error'>{errors.adress?.message}</p>
+								</div>
+								<div className=' row'>
+									{/* regiones */}
+									<div className='col-6 input-group form-group'>
+										<select
+											className='w-100 form-control'
+											id='regiones'
+											{...register("region")}
+										></select>
+										<p className='w-100 error'>{errors.region?.message}</p>
+									</div>
+									{/* comunas */}
+									<div className='col-6'>
+										<select
+											className='w-100 form-control'
+											id='comunas'
+											{...register("comuna")}
+										></select>
+										<p className='w-100 error'>{errors.comuna?.message}</p>
+									</div>
 								</div>
 								{/* fecha nacimiento */}
 								<div className='input-group form-group'>
