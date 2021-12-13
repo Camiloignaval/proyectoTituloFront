@@ -52,34 +52,39 @@ export const RegisterScreen = () => {
 	});
 
 	const onSubmit = (data) => {
-		console.log(data);
 		if (!validateRUT(data.rut)) {
 			document.querySelector(".eRut").innerHTML = "Rut inválido";
 		} else {
 			try {
+				data.rut = data.rut.replace(/[.-]/gm, "");
+				// Enviar datos a api
+				enviarSolicitud(data);
+				Swal.fire(
+					"Solicitud enviada",
+					"Nos contactaremos con usted a la brevedad",
+					"success",
+				);
+				navigate("/");
 			} catch (error) {
 				console.log(error);
 			}
-			// Enviar datos a api
-			enviarSolicitud(data);
-			Swal.fire(
-				"Solicitud enviada",
-				"Nos contactaremos con usted a la brevedad",
-				"success",
-			);
-			navigate("/");
 		}
 	};
 
 	const enviarSolicitud = async (datos) => {
-		fetch("http://localhost:4000/api/auth/register", {
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			method: "POST",
-			body: JSON.stringify(datos),
-		});
+		try {
+			const resp = await fetch("http://localhost:4000/api/auth/register", {
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+				method: "POST",
+				body: JSON.stringify(datos),
+			});
+			console.log("Respuestaaaaa", resp);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	// Funciones para regiones y comunas
@@ -167,6 +172,7 @@ export const RegisterScreen = () => {
 										type='text'
 										className='form-control'
 										placeholder='Ingresa tu nombre'
+										value='Camilo'
 										{...register("name")}
 									/>
 									<p className='w-100 error'>{errors.name?.message}</p>
@@ -182,6 +188,7 @@ export const RegisterScreen = () => {
 										type='text'
 										className='form-control'
 										placeholder='Ingresa tu Apellido'
+										value='Valenzuela'
 										{...register("lastName")}
 									/>
 									<p className='w-100 error'>{errors.lastName?.message}</p>
@@ -197,44 +204,10 @@ export const RegisterScreen = () => {
 										type='text'
 										className='form-control'
 										placeholder='Ingresa tu email'
+										value='camilo@gmail.com'
 										{...register("email")}
 									/>
 									<p className='w-100 error'>{errors.email?.message}</p>
-								</div>
-								{/* Direccion */}
-								<div className='input-group form-group'>
-									<div className='input-group-prepend'>
-										<span className='input-group-text'>
-											<i className='fas fa-map-marked'></i>
-										</span>
-									</div>
-									<input
-										type='text'
-										className='form-control'
-										placeholder='Ingrese calle y número'
-										{...register("adress")}
-									/>
-									<p className='w-100 error'>{errors.adress?.message}</p>
-								</div>
-								<div className=' row'>
-									{/* regiones */}
-									<div className='col-6 input-group form-group'>
-										<select
-											className='w-100 form-control'
-											id='regiones'
-											{...register("region")}
-										></select>
-										<p className='w-100 error'>{errors.region?.message}</p>
-									</div>
-									{/* comunas */}
-									<div className='col-6'>
-										<select
-											className='w-100 form-control'
-											id='comunas'
-											{...register("comuna")}
-										></select>
-										<p className='w-100 error'>{errors.comuna?.message}</p>
-									</div>
 								</div>
 								{/* fecha nacimiento */}
 								<div className='input-group form-group'>
@@ -262,6 +235,7 @@ export const RegisterScreen = () => {
 										type='text'
 										className='form-control'
 										placeholder='Ingresa tu Rut'
+										value='18211103-1'
 										{...register("rut")}
 									/>
 									<p className='w-100 error eRut'>{errors.rut?.message}</p>
@@ -277,6 +251,7 @@ export const RegisterScreen = () => {
 										type='password'
 										className='form-control'
 										placeholder='Ingresa tu password'
+										value='blabla'
 										{...register("pass1")}
 									/>
 									<p className='w-100 error'>{errors.pass1?.message}</p>
@@ -292,9 +267,46 @@ export const RegisterScreen = () => {
 										type='password'
 										className='form-control'
 										placeholder='Repite password'
+										value='blabla'
 										{...register("pass2")}
 									/>
 									<p className='w-100 error'>{errors.pass2?.message}</p>
+								</div>
+								{/* Direccion */}
+								<div className='input-group form-group'>
+									<div className='input-group-prepend'>
+										<span className='input-group-text'>
+											<i className='fas fa-map-marked'></i>
+										</span>
+									</div>
+									<input
+										type='text'
+										className='form-control'
+										placeholder='Ingrese calle y número'
+										value='alonso'
+										{...register("adress")}
+									/>
+									<p className='w-100 error'>{errors.adress?.message}</p>
+								</div>
+								<div className=' row'>
+									{/* regiones */}
+									<div className='col-6 input-group form-group'>
+										<select
+											className='w-100 form-control'
+											id='regiones'
+											{...register("region")}
+										></select>
+										<p className='w-100 error'>{errors.region?.message}</p>
+									</div>
+									{/* comunas */}
+									<div className='col-6'>
+										<select
+											className='w-100 form-control'
+											id='comunas'
+											{...register("comuna")}
+										></select>
+										<p className='w-100 error'>{errors.comuna?.message}</p>
+									</div>
 								</div>
 								<div className='form-group mt-5'>
 									<button type='submit' className='btn btn-block login_btn'>
