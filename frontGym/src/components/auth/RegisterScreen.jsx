@@ -3,14 +3,15 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { validateRUT } from "validar-rut";
-// import swal from "sweetalert2";
-import Swal from "sweetalert2/dist/sweetalert2.all.min.js";
 import { useNavigate } from "react-router-dom";
 import { Nav } from "../ui/Nav";
 import { RegionesYcomunas } from "../../Comunas/comunas";
+import { useDispatch } from "react-redux";
+import { cambiarRegistroFalse, startRegister } from "../../actions/auth";
+import { useSelector } from "react-redux";
 
 export const RegisterScreen = () => {
-	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	// validaciones con yup
 	const schema = yup
 		.object({
@@ -50,40 +51,23 @@ export const RegisterScreen = () => {
 	} = useForm({
 		resolver: yupResolver(schema),
 	});
+	const navigate = useNavigate();
+
+	const { registro } = useSelector((state) => state.user);
+	console.log(registro);
+	useEffect(() => {
+		if (registro) {
+			navigate("/");
+			dispatch(cambiarRegistroFalse());
+		}
+	}, [registro]);
 
 	const onSubmit = (data) => {
 		if (!validateRUT(data.rut)) {
 			document.querySelector(".eRut").innerHTML = "Rut inválido";
 		} else {
-			try {
-				data.rut = data.rut.replace(/[.-]/gm, "");
-				// Enviar datos a api
-				enviarSolicitud(data);
-				Swal.fire(
-					"Solicitud enviada",
-					"Nos contactaremos con usted a la brevedad",
-					"success",
-				);
-				navigate("/");
-			} catch (error) {
-				console.log(error);
-			}
-		}
-	};
-
-	const enviarSolicitud = async (datos) => {
-		try {
-			const resp = await fetch("http://localhost:4000/api/auth/register", {
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json",
-				},
-				method: "POST",
-				body: JSON.stringify(datos),
-			});
-			console.log("Respuestaaaaa", resp);
-		} catch (error) {
-			console.log(error);
+			data.rut = data.rut.replace(/[.-]/gm, "");
+			dispatch(startRegister(data));
 		}
 	};
 
@@ -235,7 +219,6 @@ export const RegisterScreen = () => {
 										type='text'
 										className='form-control'
 										placeholder='Ingresa tu Rut'
-										value='18211103-1'
 										{...register("rut")}
 									/>
 									<p className='w-100 error eRut'>{errors.rut?.message}</p>

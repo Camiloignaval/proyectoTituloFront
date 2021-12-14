@@ -1,18 +1,20 @@
 import { types } from "../types/types";
 
-const initialState = {
-	cheking: true,
-	solicitudes: [],
-};
+const initialState = { registro: false };
 
-export const adminReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case types.viewRequest:
+		case types.sendRequest:
 			return {
 				...state,
-				cheking: false,
-				solicitudes: action.payload,
+				registro: true,
 			};
+		case types.resetRegister:
+			return {
+				...state,
+				registro: false,
+			};
+
 		default:
 			return state;
 	}

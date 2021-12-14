@@ -24,6 +24,8 @@ import {
 import "react-pro-sidebar/dist/css/styles.css";
 import "./sideBar.css";
 import { Link, NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { startViewPending } from "../../actions/admin";
 
 export const SideBar = () => {
 	//create initial menuCollapse state using useState hook
@@ -33,6 +35,12 @@ export const SideBar = () => {
 	const menuIconClick = () => {
 		//condition checking to change state from true to false and vice versa
 		menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
+	};
+
+	const dispatch = useDispatch();
+
+	const handlePending = () => {
+		dispatch(startViewPending());
 	};
 
 	return (
@@ -54,8 +62,7 @@ export const SideBar = () => {
 						<MenuItem active={true} icon={<FiHome />}>
 							Home
 						</MenuItem>
-						<MenuItem icon={<FaList />}>hola </MenuItem>
-						<MenuItem icon={<FaRegHeart />}>
+						<MenuItem onClick={handlePending} icon={<FaRegHeart />}>
 							Solicitudes <Link to='solicitudes'></Link>
 						</MenuItem>
 					</Menu>

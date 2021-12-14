@@ -1,14 +1,20 @@
+import moment from "moment";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { startAccept } from "../../actions/admin";
 
 export const Solicitud = ({ solicitud }) => {
-	const { nombre, apellido, rut, email, edad, direccion } = solicitud;
-
+	const dispatch = useDispatch();
+	const { nombre, apellido, rut, email, calle, comuna, fecha_nacimiento } =
+		solicitud;
 	const handleAcept = () => {
-		alert(rut);
+		dispatch(startAccept(solicitud));
 	};
 
-	const handleReject = () => {};
-
+	const handleReject = () => {
+		// dispatch(startReject(solicitud));
+		alert(rut);
+	};
 	return (
 		<tr>
 			<td>ejemplo</td>
@@ -16,8 +22,8 @@ export const Solicitud = ({ solicitud }) => {
 			<td>{apellido}</td>
 			<td>{rut}</td>
 			<td>{email}</td>
-			<td>{edad}</td>
-			<td>{direccion}</td>
+			<td>{moment().diff(fecha_nacimiento, "year")}</td>
+			<td>{`${calle}, ${comuna}`}</td>
 			<td>
 				<button
 					onClick={handleAcept}

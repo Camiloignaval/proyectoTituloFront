@@ -1,4 +1,5 @@
 import React from "react";
+import Swal from "sweetalert2";
 import { Nav } from "./ui/Nav";
 
 export const WelcomeScreen = () => {
