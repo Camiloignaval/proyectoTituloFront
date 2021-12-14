@@ -2,6 +2,7 @@ import { types } from "../types/types";
 
 const initialState = {
 	solicitudes: [],
+	clientes: [],
 };
 
 export const adminReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ export const adminReducer = (state = initialState, action) => {
 			return {
 				...state,
 				solicitudes: action.payload,
+			};
+		case types.viewClients:
+			return {
+				...state,
+				clientes: action.payload,
 			};
 		case types.aceptUser: {
 			return {
@@ -23,7 +29,7 @@ export const adminReducer = (state = initialState, action) => {
 			return {
 				...state,
 				solicitudes: state.solicitudes.filter(
-					(sol) => sol.rut !== action.payload.rut,
+					(sol) => sol.id_solicitud !== action.payload,
 				),
 			};
 		}

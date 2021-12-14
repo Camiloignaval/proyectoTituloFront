@@ -3,6 +3,7 @@ export const types = {
 	resetRegister: "resetRegister",
 
 	viewRequest: "Admin viewRequest",
+	viewClients: "Admin viewClients",
 
 	aceptUser: "Admin aceptUser",
 	rejectUser: "Admin rejectUser",

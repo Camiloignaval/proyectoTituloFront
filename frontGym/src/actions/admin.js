@@ -22,11 +22,12 @@ export const startAccept = (datos) => {
 			datos,
 			"POST",
 		);
+		console.log(datos);
 		const body = await resp.json();
 		console.log(body);
 		if (body.ok) {
 			dispatch(aceptUser(datos));
-			Swal.fire("Listo!", body.msg, "success");
+			await Swal.fire("Listo!", body.msg, "success");
 		} else {
 			Swal.fire("Error!", body.msg, "error");
 		}
@@ -38,11 +39,43 @@ const aceptUser = (datos) => ({
 	payload: datos,
 });
 
-// export const startReject = (datos) => {
-// 	// return async (dispatch) => {};
-// 	alert(datos);
-// };
+export const startReject = (id_solicitud) => {
+	return async (dispatch) => {
+		const resp = await fetchSinToken(
+			"http://localhost:4000/api/admin/requests",
+			{ id_solicitud },
+			"DELETE",
+		);
+		const body = await resp.json();
+		console.log("hola");
+		console.log(body);
+		if (body.ok) {
+			dispatch(deleteRequests(id_solicitud));
+			await Swal.fire("Listo!", body.msg, "success");
+		} else {
+			Swal.fire("Error!", body.msg, "error");
+		}
+	};
+};
 
+const deleteRequests = (id) => ({
+	type: types.rejectUser,
+	payload: id,
+});
+
+export const startViewClients = () => {
+	return async (dispatch) => {
+		console.log("hola");
+		const resp = await fetch("http://localhost:4000/api/admin/user");
+		const data = await resp.json();
+		dispatch(viewClients(data.datos));
+	};
+};
+
+const viewClients = (clients) => ({
+	type: types.viewClients,
+	payload: clients,
+});
 // export const startLogin = (email, password) => {
 //     return async (dispatch) => {
 //         const resp = await fetchSinToken('auth', { email, password }, 'POST')

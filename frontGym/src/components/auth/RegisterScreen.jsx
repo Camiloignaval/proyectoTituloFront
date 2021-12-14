@@ -156,7 +156,6 @@ export const RegisterScreen = () => {
 										type='text'
 										className='form-control'
 										placeholder='Ingresa tu nombre'
-										value='Camilo'
 										{...register("name")}
 									/>
 									<p className='w-100 error'>{errors.name?.message}</p>
@@ -172,7 +171,6 @@ export const RegisterScreen = () => {
 										type='text'
 										className='form-control'
 										placeholder='Ingresa tu Apellido'
-										value='Valenzuela'
 										{...register("lastName")}
 									/>
 									<p className='w-100 error'>{errors.lastName?.message}</p>
@@ -188,7 +186,6 @@ export const RegisterScreen = () => {
 										type='text'
 										className='form-control'
 										placeholder='Ingresa tu email'
-										value='camilo@gmail.com'
 										{...register("email")}
 									/>
 									<p className='w-100 error'>{errors.email?.message}</p>
@@ -266,7 +263,6 @@ export const RegisterScreen = () => {
 										type='text'
 										className='form-control'
 										placeholder='Ingrese calle y número'
-										value='alonso'
 										{...register("adress")}
 									/>
 									<p className='w-100 error'>{errors.adress?.message}</p>

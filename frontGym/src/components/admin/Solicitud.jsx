@@ -1,19 +1,26 @@
 import moment from "moment";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { startAccept } from "../../actions/admin";
+import { startAccept, startReject } from "../../actions/admin";
 
 export const Solicitud = ({ solicitud }) => {
 	const dispatch = useDispatch();
-	const { nombre, apellido, rut, email, calle, comuna, fecha_nacimiento } =
-		solicitud;
+	const {
+		nombre,
+		apellido,
+		rut,
+		email,
+		calle,
+		comuna,
+		fecha_nacimiento,
+		id_solicitud,
+	} = solicitud;
 	const handleAcept = () => {
 		dispatch(startAccept(solicitud));
 	};
 
 	const handleReject = () => {
-		// dispatch(startReject(solicitud));
-		alert(rut);
+		dispatch(startReject(id_solicitud));
 	};
 	return (
 		<tr>

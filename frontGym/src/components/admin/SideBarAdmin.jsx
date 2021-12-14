@@ -12,7 +12,7 @@ import {
 } from "react-pro-sidebar";
 
 //import icons from react icons
-import { FaList, FaRegHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
 import {
 	FiHome,
 	FiLogOut,
@@ -23,11 +23,9 @@ import {
 //import sidebar css from react-pro-sidebar module and our custom css
 import "react-pro-sidebar/dist/css/styles.css";
 import "./sideBar.css";
-import { Link, NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { startViewPending } from "../../actions/admin";
+import { Link } from "react-router-dom";
 
-export const SideBar = () => {
+export const SideBarAdmin = () => {
 	//create initial menuCollapse state using useState hook
 	const [menuCollapse, setMenuCollapse] = useState(false);
 
@@ -35,12 +33,6 @@ export const SideBar = () => {
 	const menuIconClick = () => {
 		//condition checking to change state from true to false and vice versa
 		menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
-	};
-
-	const dispatch = useDispatch();
-
-	const handlePending = () => {
-		dispatch(startViewPending());
 	};
 
 	return (
@@ -60,9 +52,12 @@ export const SideBar = () => {
 				<SidebarContent>
 					<Menu iconShape='square'>
 						<MenuItem active={true} icon={<FiHome />}>
-							Home
+							Perfil
 						</MenuItem>
-						<MenuItem onClick={handlePending} icon={<FaRegHeart />}>
+						<MenuItem icon={<FaRegHeart />}>
+							Clientes <Link to='clientes'></Link>
+						</MenuItem>
+						<MenuItem icon={<FaRegHeart />}>
 							Solicitudes <Link to='solicitudes'></Link>
 						</MenuItem>
 					</Menu>

@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Outlet } from "react-router";
-import Swal from "sweetalert2";
-import { SideBar } from "./SideBar";
+import { startViewClients, startViewPending } from "../../actions/admin";
+import { SideBarAdmin } from "./SideBarAdmin";
 
 export const DashboardAdmin = () => {
+	const dispatch = useDispatch();
+	// apenas abra el dashboard cargasd solicitudes en state
+	useEffect(() => {
+		dispatch(startViewPending());
+		dispatch(startViewClients());
+	}, []);
+
 	return (
 		<div>
-			<SideBar />
+			<SideBarAdmin />
 			<Outlet />
 		</div>
 	);
