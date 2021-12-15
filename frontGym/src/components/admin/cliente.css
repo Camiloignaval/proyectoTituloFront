@@ -1,0 +1,17 @@
+#swal-input2 {
+	height: 15em !important;
+	width: 20em !important;
+	background-color: rgb(53, 53, 53);
+}
+
+#swal-input1 {
+	width: 20em !important;
+	background-color: rgb(53, 53, 53);
+}
+
+.swal-size {
+	height: 80vh !important;
+	width: 55vw !important;
+	background-color: rgb(32, 32, 32);
+	color: white;
+}

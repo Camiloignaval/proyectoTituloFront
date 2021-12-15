@@ -26,3 +26,26 @@ export const cambiarRegistroFalse = () => ({
 const enviarSolicitud = () => ({
 	type: types.sendRequest,
 });
+
+export const startLogin = (datos) => {
+	return async (dispatch) => {
+		const resp = await fetchSinToken(
+			"http://localhost:4000/api/auth/",
+			datos,
+			"POST",
+		);
+		const body = await resp.json();
+		if (body.ok) {
+			dispatch(login(body.data));
+			localStorage.setItem("token", body.token);
+			
+		} else {
+			Swal.fire("Error!", body.msg, "error");
+		}
+	};
+};
+
+const login = (datos) => ({
+	type: types.login,
+	payload: datos,
+});

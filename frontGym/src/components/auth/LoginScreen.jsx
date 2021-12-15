@@ -1,19 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Nav } from "../ui/Nav";
+import { useDispatch } from "react-redux";
+import { startLogin } from "../../actions/auth";
+import { useSelector } from "react-redux";
 
 export const LoginScreen = () => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const { info } = useSelector((state) => state.user);
+	console.log(info);
+
+	useEffect(() => {
+		if (info !== null) {
+			if (info.id_cargo === 3) {
+				navigate("/user");
+			} else if (info.id_cargo === 1) {
+				navigate("/admin");
+			}
+		}
+	}, [info]);
 	// validaciones con yup
 	const schema = yup
 		.object({
-			email: yup
-				.string()
-				.email("Formato incorrecto (example@email.com)")
-				.required("Email requerido"),
+			rut: yup.string().required("Rut requerido"),
 			password: yup.string().required("Contraseña requerida"),
 		})
 		.required();
@@ -26,7 +40,9 @@ export const LoginScreen = () => {
 		resolver: yupResolver(schema),
 	});
 
-	const onSubmit = (data) => console.log(data);
+	const onSubmit = (data) => {
+		dispatch(startLogin(data));
+	};
 
 	return (
 		<>
@@ -45,14 +61,14 @@ export const LoginScreen = () => {
 											<i className='fas fa-user'></i>
 										</span>
 									</div>
-									{/* Nombre usuario */}
+									{/* rut */}
 									<input
 										type='text'
 										className='form-control'
-										placeholder='email'
-										{...register("email")}
+										placeholder='rut'
+										{...register("rut")}
 									/>
-									<p className='w-100 error'>{errors.email?.message}</p>
+									<p className='w-100 error'>{errors.rut?.message}</p>
 								</div>
 								<div className='input-group form-group'>
 									<div className='input-group-prepend'>

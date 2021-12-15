@@ -54,7 +54,6 @@ export const RegisterScreen = () => {
 	const navigate = useNavigate();
 
 	const { registro } = useSelector((state) => state.user);
-	console.log(registro);
 	useEffect(() => {
 		if (registro) {
 			navigate("/");

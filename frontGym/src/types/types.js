@@ -10,4 +10,6 @@ export const types = {
 
 	aceptUser: "Admin aceptUser",
 	rejectUser: "Admin rejectUser",
+
+	login: "user login",
 };

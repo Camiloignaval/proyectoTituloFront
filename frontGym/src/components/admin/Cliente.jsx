@@ -4,15 +4,13 @@ import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import "moment/locale/es";
 import { startToggleBlock } from "../../actions/admin";
+import "./cliente.css";
+import { fetchSinToken } from "../../hooks/fetch";
 
 export const Cliente = ({ cliente: c }) => {
 	const dispatch = useDispatch();
 
-	const handleMsg = () => {
-		// dispatch(startAccept(solicitud));
-		alert("Enviar mensaje");
-	};
-
+	// bloquear usuario
 	const handleBloq = () => {
 		dispatch(
 			startToggleBlock({
@@ -21,7 +19,7 @@ export const Cliente = ({ cliente: c }) => {
 			}),
 		);
 	};
-
+	// desbloquear usuario
 	const handleUnbloq = () => {
 		dispatch(
 			startToggleBlock({
@@ -30,6 +28,7 @@ export const Cliente = ({ cliente: c }) => {
 			}),
 		);
 	};
+	// fdesplegar informacion extra
 	const handleInfo = () => {
 		Swal.fire({
 			title: `${c.nombre} ${c.apellido}`,
@@ -51,13 +50,52 @@ export const Cliente = ({ cliente: c }) => {
 		  </table>`,
 		});
 	};
+	// enviar mensaje
+	const handleMsg = async () => {
+		const { value: formValues } = await Swal.fire({
+			title: `Enviar mensaje a ${c.nombre} ${c.apellido}`,
+			customClass: "swal-size",
+			showCancelButton: true,
+			allowOutsideClick: false,
+			confirmButtonColor: "#ffc312",
+			html:
+				'<input placeholder="Asunto" id="swal-input1" class="swal2-input">' +
+				'<textarea placeholder="Escribe tu mensaje" id="swal-input2" class="swal2-input">',
+			focusConfirm: false,
+			confirmButtonText: "Enviar",
+			preConfirm: () => {
+				if (
+					document.getElementById("swal-input1").value == "" ||
+					document.getElementById("swal-input2").value == ""
+				) {
+					Swal.showValidationMessage("Debe rellenar ambos campos");
+				}
+				return [
+					document.getElementById("swal-input1").value,
+					document.getElementById("swal-input2").value,
+				];
+			},
+		});
+		if (formValues) {
+			Swal.fire(JSON.stringify("Mensaje enviado"));
+			await fetchSinToken(
+				"http://localhost:4000/api/msg/send",
+				{
+					tipo: "recordatorio",
+					mensaje: formValues[1],
+					subject: formValues[0],
+					...c,
+				},
+				"POST",
+			);
+		}
+	};
 	return (
 		<tr>
 			<td>ejemplo</td>
 			<td>{c.nombre}</td>
 			<td>{c.apellido}</td>
 			<td>{c.rut}</td>
-			{/* <td>{moment().diff(fecha_nacimiento, "year")}</td> */}
 			<td>{`${c.calle}, ${c.nombre_comuna}`}</td>
 			<td>
 				<button
@@ -73,6 +111,9 @@ export const Cliente = ({ cliente: c }) => {
 					onClick={handleMsg}
 					type='button'
 					className='btn btn-success m-1 w-100'
+					data-whatever='@mdo'
+					data-toggle='modal'
+					data-target='#exampleModal'
 				>
 					Enviar Mensaje
 				</button>

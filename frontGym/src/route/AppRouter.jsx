@@ -5,6 +5,7 @@ import { DashboardAdmin } from "../components/admin/DashboardAdmin";
 import { Solicitudes } from "../components/admin/Solicitudes";
 import { LoginScreen } from "../components/auth/LoginScreen";
 import { RegisterScreen } from "../components/auth/RegisterScreen";
+import { DashboardCliente } from "../components/cliente/DashboardCliente";
 import { WelcomeScreen } from "../components/WelcomeScreen";
 
 export const AppRouter = () => {
@@ -15,6 +16,7 @@ export const AppRouter = () => {
 					<Route path='/' element={<WelcomeScreen />} />
 					<Route path='/login' element={<LoginScreen />} />
 					<Route path='/register' element={<RegisterScreen />} />
+					<Route path='/user' element={<DashboardCliente />} />
 					<Route path='/admin' element={<DashboardAdmin />}>
 						<Route path='solicitudes' element={<Solicitudes />} />
 						<Route path='clientes' element={<Clientes />} />
