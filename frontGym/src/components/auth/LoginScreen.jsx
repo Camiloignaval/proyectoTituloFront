@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { Nav } from "../ui/Nav";
 import { useDispatch } from "react-redux";
 import { startLogin } from "../../actions/auth";
 import { useSelector } from "react-redux";
@@ -14,15 +13,15 @@ export const LoginScreen = () => {
 	const navigate = useNavigate();
 	const { info } = useSelector((state) => state.user);
 
-	// useEffect(() => {
-	// 	if (info !== null) {
-	// 		if (info.id_cargo === 3) {
-	// 			navigate("/user");
-	// 		} else if (info.id_cargo === 1) {
-	// 			navigate("/admin");
-	// 		}
-	// 	}
-	// }, [info]);
+	useEffect(() => {
+		if (info !== null) {
+			if (info.id_cargo === 3) {
+				navigate("/user");
+			} else if (info.id_cargo === 1) {
+				navigate("/admin");
+			}
+		}
+	}, [info]);
 	// validaciones con yup
 	const schema = yup
 		.object({
@@ -45,7 +44,6 @@ export const LoginScreen = () => {
 
 	return (
 		<>
-			<Nav />
 			<div className='container mt-5'>
 				<div className='d-flex justify-content-center h-100'>
 					<div className='card'>

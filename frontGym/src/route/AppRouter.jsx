@@ -7,8 +7,9 @@ import { DashboardAdmin } from "../components/admin/DashboardAdmin";
 import { Solicitudes } from "../components/admin/Solicitudes";
 import { LoginScreen } from "../components/auth/LoginScreen";
 import { RegisterScreen } from "../components/auth/RegisterScreen";
+import { WelcomeScreen } from "../components/auth/WelcomeScreen";
 import { DashboardCliente } from "../components/cliente/DashboardCliente";
-import { WelcomeScreen } from "../components/WelcomeScreen";
+import { DashboardAuth } from "../components/DashboardAuth";
 
 export const AppRouter = () => {
 	const dispatch = useDispatch();
@@ -23,7 +24,6 @@ export const AppRouter = () => {
 				console.log("admin encontrado");
 			} else if (id_cargo == 3) {
 				console.log("cliente encontrado");
-	
 			}
 		}
 	}, [active, dispatch]);
@@ -32,10 +32,14 @@ export const AppRouter = () => {
 		<>
 			<BrowserRouter>
 				<Routes>
-					<Route path='/' element={<WelcomeScreen />} />
-					<Route path='/login' element={<LoginScreen />} />
-					<Route path='/register' element={<RegisterScreen />} />
+					<Route path='/' element={<DashboardAuth />}>
+						<Route path='' element={<WelcomeScreen />} />
+						<Route path='login' element={<LoginScreen />} />
+						<Route path='register' element={<RegisterScreen />} />
+					</Route>
+
 					<Route path='/user' element={<DashboardCliente />} />
+
 					<Route path='/admin' element={<DashboardAdmin />}>
 						<Route path='solicitudes' element={<Solicitudes />} />
 						<Route path='clientes' element={<Clientes />} />

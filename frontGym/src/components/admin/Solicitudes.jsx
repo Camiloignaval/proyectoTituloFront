@@ -8,9 +8,11 @@ import "./solicitudes.css";
 export const Solicitudes = () => {
 	const navigate = useNavigate();
 	const { solicitudes } = useSelector((state) => state.admin);
-
+	const {
+		info: { id_cargo },
+	} = useSelector((state) => state.user);
 	useEffect(() => {
-		if (solicitudes.length === 0) {
+		if (solicitudes.length === 0 && id_cargo === 1) {
 			Swal.fire("Lo sentimos", "No tiene solicitudes pendientes", "info");
 			navigate("/admin");
 		}

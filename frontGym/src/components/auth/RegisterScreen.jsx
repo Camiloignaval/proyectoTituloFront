@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { validateRUT } from "validar-rut";
 import { useNavigate } from "react-router-dom";
-import { Nav } from "../ui/Nav";
 import { RegionesYcomunas } from "../../Comunas/comunas";
 import { useDispatch } from "react-redux";
 import { cambiarRegistroFalse, startRegister } from "../../actions/auth";
@@ -12,6 +11,18 @@ import { useSelector } from "react-redux";
 
 export const RegisterScreen = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const { info } = useSelector((state) => state.user);
+
+	useEffect(() => {
+		if (info !== null) {
+			if (info.id_cargo === 3) {
+				navigate("/user");
+			} else if (info.id_cargo === 1) {
+				navigate("/admin");
+			}
+		}
+	}, [info]);
 	// validaciones con yup
 	const schema = yup
 		.object({
@@ -51,7 +62,6 @@ export const RegisterScreen = () => {
 	} = useForm({
 		resolver: yupResolver(schema),
 	});
-	const navigate = useNavigate();
 
 	const { registro } = useSelector((state) => state.user);
 	useEffect(() => {
@@ -135,7 +145,7 @@ export const RegisterScreen = () => {
 
 	return (
 		<>
-			<Nav />
+			{/* <Nav /> */}
 			<div className='container mt-5'>
 				<div className='d-flex justify-content-center h-100'>
 					<div className='card'>
