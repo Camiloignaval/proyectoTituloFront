@@ -22,9 +22,7 @@ export const startAccept = (datos) => {
 			datos,
 			"POST",
 		);
-		console.log(datos);
 		const body = await resp.json();
-		console.log(body);
 		if (body.ok) {
 			dispatch(aceptUser(datos));
 			await Swal.fire("Listo!", body.msg, "success");
@@ -47,8 +45,6 @@ export const startReject = (id_solicitud) => {
 			"DELETE",
 		);
 		const body = await resp.json();
-		console.log("hola");
-		console.log(body);
 		if (body.ok) {
 			dispatch(deleteRequests(id_solicitud));
 			await Swal.fire("Listo!", body.msg, "success");
@@ -65,7 +61,6 @@ const deleteRequests = (id) => ({
 
 export const startViewClients = () => {
 	return async (dispatch) => {
-		console.log("hola");
 		const resp = await fetch("http://localhost:4000/api/admin/user");
 		const data = await resp.json();
 		dispatch(viewClients(data.datos));
@@ -76,6 +71,37 @@ const viewClients = (clients) => ({
 	type: types.viewClients,
 	payload: clients,
 });
+
+export const startToggleBlock = (datos) => {
+	return async (dispatch) => {
+		const resp = await fetchSinToken(
+			"http://localhost:4000/api/admin/block",
+			datos,
+			"PUT",
+		);
+		const body = await resp.json();
+		if (body.ok) {
+			if (datos.bloquear) {
+				dispatch(blockUser(datos));
+			} else {
+				dispatch(unblockUser(datos));
+			}
+		} else {
+			Swal.fire("Error!", body.msg, "error");
+		}
+	};
+};
+
+const blockUser = (datos) => ({
+	type: types.blockUser,
+	payload: datos,
+});
+
+const unblockUser = (datos) => ({
+	type: types.unblockUser,
+	payload: datos,
+});
+
 // export const startLogin = (email, password) => {
 //     return async (dispatch) => {
 //         const resp = await fetchSinToken('auth', { email, password }, 'POST')

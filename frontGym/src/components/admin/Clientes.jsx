@@ -6,7 +6,6 @@ import { Cliente } from "./Cliente";
 export const Clientes = () => {
 	const navigate = useNavigate();
 	const { clientes } = useSelector((state) => state.admin);
-	console.log(clientes);
 	useEffect(() => {
 		if (clientes.length === 0) {
 			Swal.fire("Lo sentimos", "No tiene clientes pendientes", "info");

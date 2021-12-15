@@ -33,6 +33,28 @@ export const adminReducer = (state = initialState, action) => {
 				),
 			};
 		}
+		case types.blockUser:
+			return {
+				...state,
+				clientes: state.clientes.map((c) => {
+					if (c.id_usuario == action.payload.id_usuario) {
+						c.bloqueado = true;
+						return c;
+					}
+					return c;
+				}),
+			};
+		case types.unblockUser:
+			return {
+				...state,
+				clientes: state.clientes.map((c) => {
+					if (c.id_usuario == action.payload.id_usuario) {
+						c.bloqueado = false;
+						return c;
+					}
+					return c;
+				}),
+			};
 		default:
 			return state;
 	}
