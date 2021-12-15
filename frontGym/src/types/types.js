@@ -11,5 +11,7 @@ export const types = {
 	aceptUser: "Admin aceptUser",
 	rejectUser: "Admin rejectUser",
 
+	checkValidateUser: "Auth check validate",
+
 	login: "user login",
 };

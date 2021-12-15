@@ -1,10 +1,12 @@
 import Swal from "sweetalert2";
-import { fetchSinToken } from "../hooks/fetch";
+import { fetchConToken, fetchSinToken } from "../hooks/fetch";
 import { types } from "../types/types";
 
 export const startViewPending = () => {
 	return async (dispatch) => {
-		const resp = await fetch("http://localhost:4000/api/admin/requests");
+		const resp = await fetchConToken(
+			"http://localhost:4000/api/admin/requests",
+		);
 		const data = await resp.json();
 		dispatch(viewPending(data.datos));
 	};
@@ -17,7 +19,7 @@ const viewPending = (datos) => ({
 
 export const startAccept = (datos) => {
 	return async (dispatch) => {
-		const resp = await fetchSinToken(
+		const resp = await fetchConToken(
 			"http://localhost:4000/api/admin/user",
 			datos,
 			"POST",
@@ -39,7 +41,7 @@ const aceptUser = (datos) => ({
 
 export const startReject = (id_solicitud) => {
 	return async (dispatch) => {
-		const resp = await fetchSinToken(
+		const resp = await fetchConToken(
 			"http://localhost:4000/api/admin/requests",
 			{ id_solicitud },
 			"DELETE",
@@ -61,7 +63,7 @@ const deleteRequests = (id) => ({
 
 export const startViewClients = () => {
 	return async (dispatch) => {
-		const resp = await fetch("http://localhost:4000/api/admin/user");
+		const resp = await fetchConToken("http://localhost:4000/api/admin/user");
 		const data = await resp.json();
 		dispatch(viewClients(data.datos));
 	};
@@ -74,7 +76,7 @@ const viewClients = (clients) => ({
 
 export const startToggleBlock = (datos) => {
 	return async (dispatch) => {
-		const resp = await fetchSinToken(
+		const resp = await fetchConToken(
 			"http://localhost:4000/api/admin/block",
 			datos,
 			"PUT",
