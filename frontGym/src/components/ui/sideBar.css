@@ -80,3 +80,7 @@
 		overflow: hidden;
 	}
 }
+
+.menuItem:hover {
+	background-color: #fece00;
+}

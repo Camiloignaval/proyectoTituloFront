@@ -10,22 +10,16 @@ import {
 	SidebarFooter,
 	SidebarContent,
 } from "react-pro-sidebar";
-
-//import icons from react icons
-import { FaRegHeart } from "react-icons/fa";
-import {
-	FiHome,
-	FiLogOut,
-	FiArrowLeftCircle,
-	FiArrowRightCircle,
-} from "react-icons/fi";
-
 //import sidebar css from react-pro-sidebar module and our custom css
 import "react-pro-sidebar/dist/css/styles.css";
 import "./sideBar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { startLogout } from "../../actions/auth";
+import { useDispatch } from "react-redux";
 
-export const SideBarAdmin = () => {
+export const SideBarAdmin = ({ items }) => {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	//create initial menuCollapse state using useState hook
 	const [menuCollapse, setMenuCollapse] = useState(false);
 
@@ -35,6 +29,11 @@ export const SideBarAdmin = () => {
 		menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
 	};
 
+	const handleLogout = () => {
+		dispatch(startLogout());
+		navigate("/");
+	};
+
 	return (
 		<div id='header'>
 			{/* collapsed props to change menu size using menucollapse state */}
@@ -42,29 +41,38 @@ export const SideBarAdmin = () => {
 				<SidebarHeader>
 					<div className='logotext'>
 						{/* small and big change using menucollapse state */}
-						<p>{menuCollapse ? "Logo" : "Big Logo"}</p>
+						<p>{menuCollapse ? "Logo" : "Logo Gimnasio"}</p>
 					</div>
 					<div className='closemenu' onClick={menuIconClick}>
 						{/* changing menu collapse icon on click */}
-						{menuCollapse ? <FiArrowRightCircle /> : <FiArrowLeftCircle />}
+						{menuCollapse ? (
+							<i className='far fa-arrow-alt-circle-right'></i>
+						) : (
+							<i className='far fa-arrow-alt-circle-left'></i>
+						)}
 					</div>
 				</SidebarHeader>
 				<SidebarContent>
 					<Menu iconShape='square'>
-						<MenuItem active={true} icon={<FiHome />}>
-							Perfil
-						</MenuItem>
-						<MenuItem icon={<FaRegHeart />}>
-							Clientes <Link to='clientes'></Link>
-						</MenuItem>
-						<MenuItem icon={<FaRegHeart />}>
-							Solicitudes <Link to='solicitudes'></Link>
-						</MenuItem>
+						{items.map((item) => {
+							return (
+								<MenuItem
+									key={item.to}
+									className='menuItem'
+									icon={<i className={item?.icon}></i>}
+								>
+									{item.nombre} <Link to={item.to}></Link>
+								</MenuItem>
+							);
+						})}
 					</Menu>
 				</SidebarContent>
 				<SidebarFooter>
 					<Menu iconShape='square'>
-						<MenuItem icon={<FiLogOut />}>
+						<MenuItem
+							onClick={handleLogout}
+							icon={<i className='fas fa-sign-out-alt'></i>}
+						>
 							Cerrar sesión<Link to='/'></Link>
 						</MenuItem>
 					</Menu>

@@ -1,14 +1,18 @@
 import { types } from "../types/types";
 
-const initialState = { registro: false, info: {
-	id_usuario:93,
-nombre:null,
-apellido:null,
-fecha_nacimiento:null,
-email:null,
-rut:null,
-id_cargo:null,
-}, active: false };
+const initialState = {
+	registro: false,
+	info: {
+		id_usuario: 93,
+		nombre: null,
+		apellido: null,
+		fecha_nacimiento: null,
+		email: null,
+		rut: null,
+		id_cargo: null,
+	},
+	active: false,
+};
 
 export const authReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -28,6 +32,9 @@ export const authReducer = (state = initialState, action) => {
 				info: action.payload,
 				active: true,
 			};
+		}
+		case types.logout: {
+			return initialState;
 		}
 
 		default:

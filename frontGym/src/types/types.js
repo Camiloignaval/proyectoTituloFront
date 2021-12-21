@@ -14,4 +14,5 @@ export const types = {
 	checkValidateUser: "Auth check validate",
 
 	login: "user login",
+	logout: "user logout",
 };

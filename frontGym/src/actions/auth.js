@@ -68,3 +68,14 @@ const login = (datos) => ({
 	type: types.login,
 	payload: datos,
 });
+
+export const startLogout = () => {
+	return (dispatch) => {
+		localStorage.clear();
+		dispatch(logout());
+	};
+};
+
+const logout = () => ({
+	type: types.logout,
+});

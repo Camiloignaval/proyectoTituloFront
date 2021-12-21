@@ -8,7 +8,6 @@ import "./cliente.css";
 import { fetchSinToken } from "../../hooks/fetch";
 
 export const Cliente = ({ cliente: c }) => {
-	console.log(c);
 	const dispatch = useDispatch();
 
 	// bloquear usuario
@@ -53,6 +52,7 @@ export const Cliente = ({ cliente: c }) => {
 		  </table>`,
 		});
 	};
+
 	// enviar mensaje
 	const handleMsg = async () => {
 		const { value: formValues } = await Swal.fire({
@@ -106,6 +106,7 @@ export const Cliente = ({ cliente: c }) => {
 					type='button'
 					className='btn btn-info m-1 w-100'
 				>
+					<i className='fas fa-info mr-2'></i>
 					Ver Más
 				</button>
 			</td>
@@ -118,6 +119,7 @@ export const Cliente = ({ cliente: c }) => {
 					data-toggle='modal'
 					data-target='#exampleModal'
 				>
+					<i className='far fa-envelope mr-2'></i>
 					Enviar Mensaje
 				</button>
 			</td>
@@ -128,6 +130,7 @@ export const Cliente = ({ cliente: c }) => {
 						type='button'
 						className='btn btn-danger m-1 w-100'
 					>
+						<i className='fas fa-ban mr-2'></i>
 						Bloquear
 					</button>
 				) : (
