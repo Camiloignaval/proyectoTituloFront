@@ -52,6 +52,13 @@ export const RegisterScreen = () => {
 			date: yup.string().required("Fecha de nacimiento es requerida"),
 			region: yup.string().required("Favor escoger región"),
 			comuna: yup.string().required("Favor escoger comuna"),
+			telefono: yup
+				.string()
+				.required("Teléfono es requerido")
+				.matches(
+					/^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/,
+					"Formato incorrecto (+569xxxxxxxx)",
+				),
 		})
 		.required();
 
@@ -198,6 +205,20 @@ export const RegisterScreen = () => {
 										{...register("email")}
 									/>
 									<p className='w-100 error'>{errors.email?.message}</p>
+								</div>
+								<div className='input-group form-group'>
+									<div className='input-group-prepend'>
+										<span className='input-group-text'>
+											<i className='fas fa-envelope'></i>
+										</span>
+									</div>
+									<input
+										type='text'
+										className='form-control'
+										placeholder='Ingresa tu teléfono'
+										{...register("telefono")}
+									/>
+									<p className='w-100 error'>{errors.telefono?.message}</p>
 								</div>
 								{/* fecha nacimiento */}
 								<div className='input-group form-group'>

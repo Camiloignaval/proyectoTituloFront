@@ -8,6 +8,7 @@ import "./cliente.css";
 import { fetchSinToken } from "../../hooks/fetch";
 
 export const Cliente = ({ cliente: c }) => {
+	console.log(c);
 	const dispatch = useDispatch();
 
 	// bloquear usuario
@@ -47,6 +48,8 @@ export const Cliente = ({ cliente: c }) => {
 				)}</tr><br>
 			  <tr><b>Edad:</b> ${moment().diff(c.fecha_nacimiento, "year")}</tr><br>
 			  <tr><b>Email:</b> ${c.email}</tr><br>
+			  <tr><b>Teléfono:</b> ${c.telefono}</tr><br>
+
 		  </table>`,
 		});
 	};
