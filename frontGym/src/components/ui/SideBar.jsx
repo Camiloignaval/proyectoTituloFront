@@ -17,11 +17,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { startLogout } from "../../actions/auth";
 import { useDispatch } from "react-redux";
 
-export const SideBarAdmin = ({ items }) => {
+export const SideBar = ({ items }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	//create initial menuCollapse state using useState hook
-	const [menuCollapse, setMenuCollapse] = useState(false);
+	const [menuCollapse, setMenuCollapse] = useState(true);
 
 	//create a custom function that will change menucollapse state from false to true and true to false
 	const menuIconClick = () => {

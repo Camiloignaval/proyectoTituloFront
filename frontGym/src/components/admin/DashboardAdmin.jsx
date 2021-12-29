@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router";
 import { startViewClients, startViewPending } from "../../actions/admin";
-import { SideBarAdmin } from "../ui/SideBar";
+import { SideBar } from "../ui/SideBar";
 
 export const DashboardAdmin = () => {
 	const dispatch = useDispatch();
@@ -34,7 +34,7 @@ export const DashboardAdmin = () => {
 
 	return (
 		<div>
-			<SideBarAdmin items={itemsSidebar} />
+			<SideBar items={itemsSidebar} />
 			<Outlet />
 		</div>
 	);

@@ -110,3 +110,7 @@ a:hover {
 	font-style: oblique;
 	margin: 0;
 }
+
+.tipoUser {
+	margin-right: 0px !important;
+}

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 import { Cliente } from "./Cliente";
 
 export const Clientes = () => {
@@ -8,7 +9,7 @@ export const Clientes = () => {
 	const { clientes } = useSelector((state) => state.admin);
 	useEffect(() => {
 		if (clientes.length === 0) {
-			Swal.fire("Lo sentimos", "No tiene clientes pendientes", "info");
+			Swal.fire("Lo sentimos", "No tiene clientes", "info");
 			navigate("/admin");
 		}
 	}, [clientes]);

@@ -4,11 +4,12 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { startCheking } from "../actions/auth";
 import { Clientes } from "../components/admin/Clientes";
 import { DashboardAdmin } from "../components/admin/DashboardAdmin";
-import { Solicitudes } from "../components/admin/Solicitudes";
+import { TablaInfo } from "../components/admin/TablaInfo";
 import { LoginScreen } from "../components/auth/LoginScreen";
 import { RegisterScreen } from "../components/auth/RegisterScreen";
 import { WelcomeScreen } from "../components/auth/WelcomeScreen";
 import { DashboardCliente } from "../components/cliente/DashboardCliente";
+import { Profile } from "../components/cliente/Profile";
 import { DashboardAuth } from "../components/DashboardAuth";
 
 export const AppRouter = () => {
@@ -24,7 +25,11 @@ export const AppRouter = () => {
 				console.log("admin encontrado");
 			} else if (id_cargo == 3) {
 				console.log("cliente encontrado");
+			} else if (id_cargo == 2) {
+				console.log("entrenador encontrado");
 			}
+		} else {
+			console.log("niun usuario encontrado");
 		}
 	}, [active, dispatch]);
 
@@ -38,11 +43,20 @@ export const AppRouter = () => {
 						<Route path='register' element={<RegisterScreen />} />
 					</Route>
 
-					<Route path='/user' element={<DashboardCliente />} />
+					<Route path='/user' element={<DashboardCliente />}>
+						<Route path='' element={<Profile />} />
+					</Route>
 
 					<Route path='/admin' element={<DashboardAdmin />}>
-						<Route path='solicitudes' element={<Solicitudes />} />
-						<Route path='clientes' element={<Clientes />} />
+						<Route
+							path='solicitudes'
+							element={<TablaInfo necesarios='solicitudes' />}
+						/>
+						<Route
+							path='clientes'
+							element={<TablaInfo necesarios='clientes' />}
+						/>
+						<Route path='' element={<Profile />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>

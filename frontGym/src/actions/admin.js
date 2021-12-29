@@ -17,50 +17,6 @@ const viewPending = (datos) => ({
 	payload: datos,
 });
 
-export const startAccept = (datos) => {
-	return async (dispatch) => {
-		const resp = await fetchConToken(
-			"http://localhost:4000/api/admin/user",
-			datos,
-			"POST",
-		);
-		const body = await resp.json();
-		if (body.ok) {
-			dispatch(aceptUser(datos));
-			await Swal.fire("Listo!", body.msg, "success");
-		} else {
-			Swal.fire("Error!", body.msg, "error");
-		}
-	};
-};
-
-const aceptUser = (datos) => ({
-	type: types.aceptUser,
-	payload: datos,
-});
-
-export const startReject = (id_solicitud) => {
-	return async (dispatch) => {
-		const resp = await fetchConToken(
-			"http://localhost:4000/api/admin/requests",
-			{ id_solicitud },
-			"DELETE",
-		);
-		const body = await resp.json();
-		if (body.ok) {
-			dispatch(deleteRequests(id_solicitud));
-			await Swal.fire("Listo!", body.msg, "success");
-		} else {
-			Swal.fire("Error!", body.msg, "error");
-		}
-	};
-};
-
-const deleteRequests = (id) => ({
-	type: types.rejectUser,
-	payload: id,
-});
-
 export const startViewClients = () => {
 	return async (dispatch) => {
 		const resp = await fetchConToken("http://localhost:4000/api/admin/user");
@@ -72,6 +28,28 @@ export const startViewClients = () => {
 const viewClients = (clients) => ({
 	type: types.viewClients,
 	payload: clients,
+});
+
+export const startResponseRequest = (data) => {
+	return async (dispatch) => {
+		const resp = await fetchConToken(
+			`http://localhost:4000/api/admin/requests`,
+			data,
+			"PUT",
+		);
+		const body = await resp.json();
+		if (body.ok) {
+			dispatch(responseRequest(data.id_usuario));
+			await Swal.fire("Listo!", body.msg, "success");
+		} else {
+			Swal.fire("Error!", body.msg, "error");
+		}
+	};
+};
+
+const responseRequest = (datos) => ({
+	type: types.responseRequest,
+	payload: datos,
 });
 
 export const startToggleBlock = (datos) => {

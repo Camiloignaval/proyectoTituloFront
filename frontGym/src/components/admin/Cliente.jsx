@@ -96,9 +96,12 @@ export const Cliente = ({ cliente: c }) => {
 	return (
 		<tr>
 			<td>ejemplo</td>
-			<td>{c.nombre}</td>
-			<td>{c.apellido}</td>
+			<td>
+				{c.nombre} {c.apellido}
+			</td>
+
 			<td>{c.rut}</td>
+			<td>{moment().diff(c.fecha_nacimiento, "year")}</td>
 			<td>{`${c.calle}, ${c.nombre_comuna}`}</td>
 			<td>
 				<button

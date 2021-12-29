@@ -3,17 +3,13 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { Solicitud } from "./Solicitud";
-import "./solicitudes.css";
 
 export const Solicitudes = () => {
 	const navigate = useNavigate();
 	const { solicitudes } = useSelector((state) => state.admin);
-	const {
-		info: { id_cargo },
-	} = useSelector((state) => state.user);
 	useEffect(() => {
-		if (solicitudes.length === 0 && id_cargo === 1) {
-			Swal.fire("Lo sentimos", "No tiene solicitudes pendientes", "info");
+		if (solicitudes.length === 0) {
+			Swal.fire("Lo sentimos", "No tiene solicitudes", "info");
 			navigate("/admin");
 		}
 	}, [solicitudes]);

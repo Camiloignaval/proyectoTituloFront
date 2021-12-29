@@ -30,6 +30,13 @@ export const RegisterScreen = () => {
 				.string()
 				.email("Formato incorrecto (example@email.com)")
 				.required("Email requerido"),
+			telefono: yup
+				.string()
+				.required("Teléfono es requerido")
+				.matches(
+					/^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/,
+					"Formato incorrecto (+569xxxxxxxx)",
+				),
 			pass1: yup
 				.string()
 				.required("Contraseña requerida")
@@ -52,13 +59,11 @@ export const RegisterScreen = () => {
 			date: yup.string().required("Fecha de nacimiento es requerida"),
 			region: yup.string().required("Favor escoger región"),
 			comuna: yup.string().required("Favor escoger comuna"),
-			telefono: yup
+			numero: yup.string().required("Numeración requerida"),
+			type: yup
 				.string()
-				.required("Teléfono es requerido")
-				.matches(
-					/^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/,
-					"Formato incorrecto (+569xxxxxxxx)",
-				),
+				.required()
+				.matches(/[23]/g, "Favor escoger tipo de usuario"),
 		})
 		.required();
 
@@ -161,6 +166,26 @@ export const RegisterScreen = () => {
 						</div>
 						<div className='card-body'>
 							<form onSubmit={handleSubmit(onSubmit)}>
+								{/* usuario */}
+								<div className='input-group form-group'>
+									<div className='input-group-prepend'>
+										<span className='input-group-text'>
+											<i class='fas fa-user-tag'></i>{" "}
+										</span>
+									</div>
+									<select
+										className='custom-select mr-sm-2 tipoUser'
+										id='inlineFormCustomSelect'
+										{...register("type")}
+									>
+										<option value={null} selected>
+											Escoja tipo de usuario
+										</option>
+										<option value='3'>Cliente</option>
+										<option value='2'>Entrenador</option>
+									</select>
+									<p className='w-100 error'>{errors.type?.message}</p>
+								</div>
 								{/* nombre */}
 								<div className='input-group form-group'>
 									<div className='input-group-prepend'>
@@ -206,10 +231,11 @@ export const RegisterScreen = () => {
 									/>
 									<p className='w-100 error'>{errors.email?.message}</p>
 								</div>
+								{/* telefono */}
 								<div className='input-group form-group'>
 									<div className='input-group-prepend'>
 										<span className='input-group-text'>
-											<i className='fas fa-envelope'></i>
+											<i class='fas fa-phone'></i>{" "}
 										</span>
 									</div>
 									<input
@@ -283,32 +309,77 @@ export const RegisterScreen = () => {
 									<p className='w-100 error'>{errors.pass2?.message}</p>
 								</div>
 								{/* Direccion */}
-								<div className='input-group form-group'>
-									<div className='input-group-prepend'>
-										<span className='input-group-text'>
-											<i className='fas fa-map-marked'></i>
-										</span>
+								<div className='row'>
+									{/* calle */}
+									<div className='input-group form-group col-9'>
+										<div className='input-group-prepend'>
+											<span className='input-group-text'>
+												<i class='fas fa-house-user'></i>
+											</span>
+										</div>
+										<input
+											type='text'
+											className='form-control'
+											placeholder='Ingrese calle'
+											{...register("adress")}
+										/>
+										<p className='w-100 error'>{errors.adress?.message}</p>
 									</div>
-									<input
-										type='text'
-										className='form-control'
-										placeholder='Ingrese calle y número'
-										{...register("adress")}
-									/>
-									<p className='w-100 error'>{errors.adress?.message}</p>
+									{/* numero */}
+									<div className='input-group form-group col-3 pl-0'>
+										<input
+											type='number'
+											className='form-control'
+											placeholder='num'
+											{...register("numero")}
+										/>
+										<p className='w-100 error'>{errors.numero?.message}</p>
+									</div>
+								</div>
+								<div className='row'>
+									{/* piso */}
+									<div className='input-group form-group col-6'>
+										<div className='input-group-prepend'>
+											<span className='input-group-text'>
+												<i class='fas fa-building'></i>{" "}
+											</span>
+										</div>
+										<input
+											type='number'
+											className='form-control'
+											placeholder='Piso(opcional)'
+											{...register("piso")}
+										/>
+										<p className='w-100 error'>{errors.piso?.message}</p>
+									</div>
+									{/* depto */}
+									<div className='input-group form-group col-6 pl-0'>
+										<input
+											type='number'
+											className='form-control'
+											placeholder='Departamento(opcional)'
+											{...register("depto")}
+										/>
+										<p className='w-100 error'>{errors.depto?.message}</p>
+									</div>
 								</div>
 								<div className=' row'>
 									{/* regiones */}
-									<div className='col-6 input-group form-group'>
+									<div className='col-7 input-group form-group'>
+										<div className='input-group-prepend'>
+											<span className='input-group-text'>
+												<i class='fas fa-city'></i>{" "}
+											</span>
+										</div>
 										<select
-											className='w-100 form-control'
+											className=' form-control'
 											id='regiones'
 											{...register("region")}
-										></select>
+										/>
 										<p className='w-100 error'>{errors.region?.message}</p>
 									</div>
 									{/* comunas */}
-									<div className='col-6'>
+									<div className='col-5 pl-0'>
 										<select
 											className='w-100 form-control'
 											id='comunas'

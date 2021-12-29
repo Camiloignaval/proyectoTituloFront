@@ -1,36 +1,39 @@
 import moment from "moment";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { startAccept, startReject } from "../../actions/admin";
+import { startResponseRequest } from "../../actions/admin";
 
 export const Solicitud = ({ solicitud }) => {
 	const dispatch = useDispatch();
 	const {
+		id_usuario,
 		nombre,
 		apellido,
 		rut,
-		email,
 		calle,
-		comuna,
 		fecha_nacimiento,
-		id_solicitud,
+		id_cargo,
+		nombre_comuna,
+		num_direccion,
+		email,
 	} = solicitud;
 	const handleAcept = () => {
-		dispatch(startAccept(solicitud));
+		dispatch(startResponseRequest({ id_usuario, accion: "aceptar", rut }));
 	};
 
 	const handleReject = () => {
-		dispatch(startReject(id_solicitud));
+		dispatch(startResponseRequest({ id_usuario, accion: "rechazar", rut }));
 	};
 	return (
 		<tr>
 			<td>ejemplo</td>
-			<td>{nombre}</td>
-			<td>{apellido}</td>
+			<td>
+				{nombre} {apellido}
+			</td>
 			<td>{rut}</td>
-			<td>{email}</td>
 			<td>{moment().diff(fecha_nacimiento, "year")}</td>
-			<td>{`${calle}, ${comuna}`}</td>
+			<td>{`${calle} ${num_direccion}, ${nombre_comuna}`}</td>
+			<td>{id_cargo == 3 ? "Cliente" : "Entrenador"}</td>
 			<td>
 				<button
 					onClick={handleAcept}

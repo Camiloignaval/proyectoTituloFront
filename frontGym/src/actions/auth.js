@@ -1,11 +1,12 @@
 import Swal from "sweetalert2";
+import { uploadCloudinary } from "../../helpers/uploadCloudinary";
 import { fetchConToken, fetchSinToken } from "../hooks/fetch";
 import { types } from "../types/types";
 
 export const startRegister = (datos) => {
 	return async (dispatch) => {
 		const resp = await fetchSinToken(
-			"http://localhost:4000/api/auth/register",
+			"http://localhost:4000/api/auth/user",
 			datos,
 			"POST",
 		);
@@ -52,7 +53,6 @@ export const startCheking = () => {
 		if (body.ok) {
 			localStorage.setItem("token", body.token);
 			// console.log("SI HAY TOKEN");
-			// console.log(body.data);
 			dispatch(
 				// corregir esto
 				login(body.data),
@@ -79,3 +79,77 @@ export const startLogout = () => {
 const logout = () => ({
 	type: types.logout,
 });
+
+export const startEditProfile = () => {
+	return async (dispatch) => {
+		dispatch(editProfile());
+	};
+};
+
+const editProfile = () => ({
+	type: types.editProfileOn,
+});
+
+export const startUploadImg = (url) => {
+	return async (dispatch) => {
+		// const url = uploadCloudinary();
+		console.log(url);
+	};
+};
+
+export const startUpdateProfile = (data) => {
+	return async (dispatch) => {
+		const resp = await fetchConToken(
+			"http://localhost:4000/api/auth/user/",
+			data,
+			"PUT",
+		);
+		const body = await resp.json();
+
+		if (body.ok) {
+			dispatch(updateProfile(data));
+			Swal.fire({
+				position: "center",
+				icon: "success",
+				title: body.msg,
+				showConfirmButton: false,
+				timer: 1500,
+			});
+		} else {
+			Swal.fire("oh oh!", body.msg, "error");
+		}
+	};
+};
+
+const updateProfile = (data) => ({
+	type: types.updateProfile,
+	payload: data,
+});
+
+export const cancelEdit = () => {
+	return (dispatch) => dispatch({ type: types.cancelUpdate });
+};
+
+export const startBajaCuenta = (data) => {
+	return async (dispatch) => {
+		const resp = await fetchConToken(
+			`http://localhost:4000/api/auth/user/`,
+			data,
+			"DELETE",
+		);
+		const body = await resp.json();
+		if (body.ok) {
+			Swal.fire({
+				position: "center",
+				icon: "success",
+				title: body.msg,
+				showConfirmButton: false,
+				timer: 1500,
+			});
+			localStorage.clear();
+			dispatch(logout());
+		} else {
+			Swal.fire("oh oh!", body.msg, "error");
+		}
+	};
+};
