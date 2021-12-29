@@ -23,4 +23,6 @@ export const types = {
 	cancelUpdate: "User cancel update ",
 
 	darDeBaja: "User da de baja",
+
+	finishChecking: "Finish login cheking",
 };

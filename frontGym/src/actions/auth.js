@@ -52,17 +52,17 @@ export const startCheking = () => {
 
 		if (body.ok) {
 			localStorage.setItem("token", body.token);
-			// console.log("SI HAY TOKEN");
-			dispatch(
-				// corregir esto
-				login(body.data),
-			);
+			dispatch(login(body.data));
+			dispatch(checkingFinish());
 		} else {
-			// dispatch(checkingFinish());
-			// console.log("NO HAY TOKEN");
+			dispatch(checkingFinish());
 		}
 	};
 };
+
+const checkingFinish = () => ({
+	type: types.finishChecking,
+});
 
 const login = (datos) => ({
 	type: types.login,

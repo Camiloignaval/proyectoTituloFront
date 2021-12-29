@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { validateRUT } from "validar-rut";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { RegionesYcomunas } from "../../Comunas/comunas";
 import { useDispatch } from "react-redux";
 import { cambiarRegistroFalse, startRegister } from "../../actions/auth";
@@ -11,19 +11,6 @@ import { useSelector } from "react-redux";
 
 export const RegisterScreen = () => {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
-	const { info } = useSelector((state) => state.user);
-
-	useEffect(() => {
-		if (info !== null) {
-			if (info.id_cargo === 3) {
-				navigate("/user");
-			} else if (info.id_cargo === 1) {
-				navigate("/admin");
-			}
-		}
-	}, [info]);
-	// validaciones con yup
 	const schema = yup
 		.object({
 			email: yup
@@ -78,7 +65,7 @@ export const RegisterScreen = () => {
 	const { registro } = useSelector((state) => state.user);
 	useEffect(() => {
 		if (registro) {
-			navigate("/");
+			<Navigate to='login' />;
 			dispatch(cambiarRegistroFalse());
 		}
 	}, [registro]);

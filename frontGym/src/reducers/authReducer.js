@@ -15,6 +15,7 @@ const initialState = {
 	},
 	active: false,
 	editMode: false,
+	checking: true,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -67,6 +68,12 @@ export const authReducer = (state = initialState, action) => {
 			return {
 				...state,
 				editMode: false,
+			};
+		}
+		case types.finishChecking: {
+			return {
+				...state,
+				checking: false,
 			};
 		}
 
