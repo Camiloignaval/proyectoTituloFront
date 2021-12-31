@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./profile.css";
 import {
 	cancelEdit,
+	startChangePass,
 	startEditProfile,
 	startUpdateProfile,
 	startUploadImg,
@@ -12,11 +13,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { uploadCloudinary } from "../../../helpers/uploadCloudinary";
-import { DarDeBaja } from "../ui/buttons/DarDeBaja";
+import { DarDeBaja } from "./buttons/DarDeBaja";
+import { FormPass } from "./FormPass";
 export const Profile = () => {
 	const dispatch = useDispatch();
 	const {
 		editMode,
+		changePass,
 		info: {
 			id_usuario,
 			nombre,
@@ -82,6 +85,10 @@ export const Profile = () => {
 		dispatch(cancelEdit());
 	};
 
+	const handleChangePass = async () => {
+		dispatch(startChangePass());
+	};
+
 	return (
 		<div>
 			<form onSubmit={handleSubmit(onSubmit)}>
@@ -100,21 +107,6 @@ export const Profile = () => {
 								</button>
 							</div>
 						)}
-						{/* 
-							{editMode ? (
-								<button type='submit' className='btn btn-success'>
-									Guardar cambios
-								</button>
-							) : (
-								<button
-									type='button'
-									className='btn btn-primary'
-									onClick={handleEdit}
-								>
-									Editar perfil
-								</button>
-							)}
-						</div> */}
 					</div>
 					<ul className='nav nav-tabs' id='myTab' role='tablist'></ul>
 					<br />
@@ -126,6 +118,7 @@ export const Profile = () => {
 									<div className='file btn btn-lg btn-primary'>
 										Cambiar foto
 										<input
+											className='clickFoto'
 											onClick={handleUploadImg}
 											// type='file'
 											// name='file'
@@ -207,7 +200,19 @@ export const Profile = () => {
 												<p>{email}</p>
 											)}
 										</div>
-										<div className='col-md-6'></div>
+										<div className='col-md-6 mt-3'>
+											{!changePass && (
+												<button
+													type='button'
+													onClick={handleChangePass}
+													className='btn btn-danger'
+													data-toggle='modal'
+													data-target='#exampleModal'
+												>
+													Cambiar contraseña
+												</button>
+											)}
+										</div>
 										<div className='col-md-6 mt-3'>
 											{editMode ? (
 												<div>
@@ -221,7 +226,7 @@ export const Profile = () => {
 													className='btn btn-primary'
 													onClick={handleEdit}
 												>
-													Editar perfil
+													Modificar datos
 												</button>
 											)}
 										</div>
@@ -232,6 +237,14 @@ export const Profile = () => {
 					</div>
 				</div>
 			</form>
+			{changePass && (
+				<div className=' mt-4 row mr-5 mr-xl-5'>
+					<div className='col-2 col-md-5'></div>
+					<div className='col-7 col-md-7 col-lg-4'>
+						<FormPass />
+					</div>
+				</div>
+			)}
 			<DarDeBaja />
 		</div>
 	);

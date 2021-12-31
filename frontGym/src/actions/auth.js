@@ -126,9 +126,8 @@ const updateProfile = (data) => ({
 	payload: data,
 });
 
-export const cancelEdit = () => {
-	return (dispatch) => dispatch({ type: types.cancelUpdate });
-};
+export const cancelEdit = () => (dispatch) =>
+	dispatch({ type: types.cancelUpdate });
 
 export const startBajaCuenta = (data) => {
 	return async (dispatch) => {
@@ -148,6 +147,34 @@ export const startBajaCuenta = (data) => {
 			});
 			localStorage.clear();
 			dispatch(logout());
+		} else {
+			Swal.fire("oh oh!", body.msg, "error");
+		}
+	};
+};
+export const startChangePass = () => (dispatch) =>
+	dispatch({ type: types.startChangePass });
+
+export const endChangePass = () => (dispatch) =>
+	dispatch({ type: types.cancelChangePass });
+
+export const sendChangePass = (data) => {
+	return async (dispatch) => {
+		const resp = await fetchConToken(
+			"http://localhost:4000/api/auth/pass",
+			data,
+			"PUT",
+		);
+		const body = await resp.json();
+		if (body.ok) {
+			Swal.fire({
+				position: "center",
+				icon: "success",
+				title: body.msg,
+				showConfirmButton: false,
+				timer: 1500,
+			});
+			dispatch({ type: types.cancelChangePass });
 		} else {
 			Swal.fire("oh oh!", body.msg, "error");
 		}

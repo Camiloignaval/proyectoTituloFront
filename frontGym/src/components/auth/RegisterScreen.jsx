@@ -42,7 +42,7 @@ export const RegisterScreen = () => {
 				.required("Apellido requerido")
 				.matches(/^[aA-zZ\s]+$/, "Solo letras porfavor"),
 			rut: yup.string().required("Rut es requerido"),
-			adress: yup.string().required("Diurección es requerida"),
+			adress: yup.string().required("Dirección es requerida"),
 			date: yup.string().required("Fecha de nacimiento es requerida"),
 			region: yup.string().required("Favor escoger región"),
 			comuna: yup.string().required("Favor escoger comuna"),

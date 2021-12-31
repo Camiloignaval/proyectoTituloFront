@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { DashboardAdmin } from "../components/admin/DashboardAdmin";
 import { TablaInfo } from "../components/admin/TablaInfo";
-import { Profile } from "../components/cliente/Profile";
+import { Profile } from "../components/ui/Profile";
 
 export const AdminRoutes = () => {
 	return (

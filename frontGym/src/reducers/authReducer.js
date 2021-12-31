@@ -16,6 +16,7 @@ const initialState = {
 	active: false,
 	editMode: false,
 	checking: true,
+	changePass: false,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -74,6 +75,18 @@ export const authReducer = (state = initialState, action) => {
 			return {
 				...state,
 				checking: false,
+			};
+		}
+		case types.cancelChangePass: {
+			return {
+				...state,
+				changePass: false,
+			};
+		}
+		case types.startChangePass: {
+			return {
+				...state,
+				changePass: true,
 			};
 		}
 

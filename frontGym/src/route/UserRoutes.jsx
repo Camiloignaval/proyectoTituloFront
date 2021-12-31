@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { DashboardCliente } from "../components/cliente/DashboardCliente";
-import { Profile } from "../components/cliente/Profile";
+import { Profile } from "../components/ui/Profile";
 
 export const UserRoutes = () => {
 	return (
