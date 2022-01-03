@@ -12,8 +12,7 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { uploadCloudinary } from "../../../helpers/uploadCloudinary";
-import { DarDeBaja } from "./buttons/DarDeBaja";
+// import { uploadCloudinary } from "../../../helpers/uploadCloudinary";
 import { FormPass } from "./FormPass";
 export const Profile = () => {
 	const dispatch = useDispatch();
@@ -75,10 +74,114 @@ export const Profile = () => {
 		dispatch(startEditProfile());
 	};
 
-	const handleUploadImg = async () => {
-		const url = await uploadCloudinary();
-
-		console.log(url);
+	const uploadCloudinary = async () => {
+		const url = await cloudinary.openUploadWidget(
+			{
+				cloudName: "dc6vako2z",
+				uploadPreset: "vdrhajj8",
+				sources: ["local", "url", "camera", "image_search", "google_drive"],
+				googleApiKey: "<image_search_google_api_key>",
+				showAdvancedOptions: false,
+				cropping: false,
+				multiple: false,
+				defaultSource: "local",
+				singleUploadAutoClose: false,
+				styles: {
+					palette: {
+						window: "#000000",
+						sourceBg: "#000000",
+						windowBorder: "white",
+						tabIcon: "#ffc312",
+						inactiveTabIcon: "#b88d0c",
+						menuIcons: "#ffc312",
+						link: "#ffc312",
+						action: "#ffc312",
+						inProgress: "#00BFFF",
+						complete: "#33ff00",
+						error: "#EA2727",
+						textDark: "#000000",
+						textLight: "#FFFFFF",
+					},
+					fonts: {
+						default: null,
+						"'Space Mono', monospace": {
+							url: "https://fonts.googleapis.com/css?family=Space+Mono",
+							active: true,
+						},
+					},
+				},
+			},
+			(err, result) => {
+				if (!err && result.event == "success") {
+					const {
+						info: { url },
+					} = result;
+					dispatch(startUploadImg({ url, id_usuario }));
+					return url;
+				} else if (err) {
+					Swal.fire(
+						"oh oh",
+						"Hemos tenido un problema, intenta mas tarde",
+						"error",
+					);
+					return { ok: false };
+				}
+			},
+		);
+		return url;
+	};
+	const handleUploadImg = () => {
+		cloudinary.openUploadWidget(
+			{
+				cloudName: "dc6vako2z",
+				uploadPreset: "vdrhajj8",
+				sources: ["local", "url", "camera", "image_search", "google_drive"],
+				googleApiKey: "<image_search_google_api_key>",
+				showAdvancedOptions: false,
+				cropping: false,
+				multiple: false,
+				defaultSource: "local",
+				singleUploadAutoClose: false,
+				styles: {
+					palette: {
+						window: "#000000",
+						sourceBg: "#000000",
+						windowBorder: "white",
+						tabIcon: "#ffc312",
+						inactiveTabIcon: "#b88d0c",
+						menuIcons: "#ffc312",
+						link: "#ffc312",
+						action: "#ffc312",
+						inProgress: "#00BFFF",
+						complete: "#33ff00",
+						error: "#EA2727",
+						textDark: "#000000",
+						textLight: "#FFFFFF",
+					},
+					fonts: {
+						default: null,
+						"'Space Mono', monospace": {
+							url: "https://fonts.googleapis.com/css?family=Space+Mono",
+							active: true,
+						},
+					},
+				},
+			},
+			(err, result) => {
+				if (!err && result.event == "success") {
+					const {
+						info: { url },
+					} = result;
+					dispatch(startUploadImg({ url, id_usuario }));
+				} else if (err) {
+					Swal.fire(
+						"oh oh",
+						"Hemos tenido un problema, intenta mas tarde",
+						"error",
+					);
+				}
+			},
+		);
 	};
 
 	const handleCancel = () => {
@@ -87,6 +190,23 @@ export const Profile = () => {
 
 	const handleChangePass = async () => {
 		dispatch(startChangePass());
+	};
+
+	const handleDelete = () => {
+		Swal.fire({
+			title: "Estás seguro?",
+			text: "No podrás revertir esto!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Si, darme de baja!",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				dispatch(startBajaCuenta({ id_usuario }));
+				navigate("/");
+			}
+		});
 	};
 
 	return (
@@ -122,7 +242,7 @@ export const Profile = () => {
 											onClick={handleUploadImg}
 											// type='file'
 											// name='file'
-											{...register("foto")}
+											// {...register("foto")}
 										/>
 									</div>
 								)}
@@ -213,7 +333,7 @@ export const Profile = () => {
 												</button>
 											)}
 										</div>
-										<div className='col-md-6 mt-3'>
+										<div className='col-md-6 mt-3 d-flex'>
 											{editMode ? (
 												<div>
 													<button type='submit' className='btn btn-success'>
@@ -227,6 +347,15 @@ export const Profile = () => {
 													onClick={handleEdit}
 												>
 													Modificar datos
+												</button>
+											)}
+											{id_cargo !== 1 && (
+												<button
+													type='button'
+													onClick={handleDelete}
+													className='ml-2 btn btn-danger'
+												>
+													Darse de baja
 												</button>
 											)}
 										</div>
@@ -245,7 +374,7 @@ export const Profile = () => {
 					</div>
 				</div>
 			)}
-			<DarDeBaja />
+			{/* <DarDeBaja /> */}
 		</div>
 	);
 };

@@ -5,11 +5,16 @@ import Swal from "sweetalert2";
 import { startCheking } from "../actions/auth";
 import { DashboardCliente } from "../components/cliente/DashboardCliente";
 import { AdminRoutes } from "./AdminRoutes";
-import { PrivateRouteUser, PrivateRouteAdmin } from "./PrivateRoutes";
+import {
+	PrivateRouteUser,
+	PrivateRouteAdmin,
+	PrivateRoutePersonal,
+} from "./PrivateRoutes";
 import { PublicRoute } from "./PublicRoute";
 import { WelcomeRoutes } from "./WelcomeRoutes";
 import { SpinnerDotted } from "spinners-react";
 import { UserRoutes } from "./UserRoutes";
+import { PersonalRoutes } from "./PersonalRoutes";
 
 export const AppRouter = () => {
 	const dispatch = useDispatch();
@@ -59,6 +64,14 @@ export const AppRouter = () => {
 							<PrivateRouteAdmin auth={active} cargo={id_cargo}>
 								<AdminRoutes />
 							</PrivateRouteAdmin>
+						}
+					/>
+					<Route
+						path='/personal/*'
+						element={
+							<PrivateRoutePersonal auth={active} cargo={id_cargo}>
+								<PersonalRoutes />
+							</PrivateRoutePersonal>
 						}
 					/>
 				</Routes>

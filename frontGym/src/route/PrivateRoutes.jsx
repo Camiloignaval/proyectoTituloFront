@@ -8,3 +8,7 @@ export const PrivateRouteUser = ({ auth, children, cargo }) => {
 export const PrivateRouteAdmin = ({ auth, children, cargo }) => {
 	return auth && cargo === 1 ? children : <Navigate to='/' />;
 };
+
+export const PrivateRoutePersonal = ({ auth, children, cargo }) => {
+	return auth && cargo === 2 ? children : <Navigate to='/' />;
+};

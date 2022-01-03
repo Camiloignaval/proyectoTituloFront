@@ -89,6 +89,15 @@ export const authReducer = (state = initialState, action) => {
 				changePass: true,
 			};
 		}
+		case types.editImg: {
+			return {
+				...state,
+				info: {
+					...state.info,
+					foto: action.payload,
+				},
+			};
+		}
 
 		default:
 			return state;

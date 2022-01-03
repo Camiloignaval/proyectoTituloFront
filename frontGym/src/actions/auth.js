@@ -1,5 +1,4 @@
 import Swal from "sweetalert2";
-import { uploadCloudinary } from "../../helpers/uploadCloudinary";
 import { fetchConToken, fetchSinToken } from "../hooks/fetch";
 import { types } from "../types/types";
 
@@ -90,12 +89,33 @@ const editProfile = () => ({
 	type: types.editProfileOn,
 });
 
-export const startUploadImg = (url) => {
+export const startUploadImg = (datos) => {
 	return async (dispatch) => {
-		// const url = uploadCloudinary();
-		console.log(url);
+		const resp = await fetchConToken(
+			"http://localhost:4000/api/auth/imgPerfil/",
+			datos,
+			"PUT",
+		);
+		const body = await resp.json();
+		if (body.ok) {
+			dispatch(uploadImg(datos.url));
+			Swal.fire({
+				position: "center",
+				icon: "success",
+				title: body.msg,
+				showConfirmButton: false,
+				timer: 1500,
+			});
+		} else {
+			Swal.fire("oh oh!", body.msg, "error");
+		}
 	};
 };
+
+const uploadImg = (url) => ({
+	type: types.editImg,
+	payload: url,
+});
 
 export const startUpdateProfile = (data) => {
 	return async (dispatch) => {

@@ -17,6 +17,7 @@ export const types = {
 
 	editProfileOn: "User start edit profile",
 	editProfileOff: "User end edit profile",
+	editImg: "User edit ImgProfile",
 
 	cancelChangePass: "User end edit pass",
 	startChangePass: "User start edit pass",

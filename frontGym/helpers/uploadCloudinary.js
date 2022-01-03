@@ -1,5 +1,8 @@
-export const uploadCloudinary =  () => {
-	return cloudinary.openUploadWidget(
+import { useDispatch } from "react-redux";
+import { startUploadImg } from "../src/actions/auth";
+
+export const uploadCloudinary = async () => {
+	return await cloudinary.openUploadWidget(
 		{
 			cloudName: "dc6vako2z",
 			uploadPreset: "vdrhajj8",
@@ -35,14 +38,14 @@ export const uploadCloudinary =  () => {
 				},
 			},
 		},
-		async (err, result) => {
+		(err, result) => {
 			if (!err && result.event == "success") {
 				// Swal.fire("Excelente", "Tu imagen ha sido actualizada", "success");
 				const {
 					info: { url },
 				} = result;
-				console.log(url);
-				return result;
+				console.log("Paso 2, url a retornar desde funcion:", url);
+				return url;
 			} else if (err) {
 				// Swal.fire(
 				// 	"oh oh",
@@ -53,6 +56,4 @@ export const uploadCloudinary =  () => {
 			}
 		},
 	);
-	// console.log("url dentro", url);
-	// return url;
 };
