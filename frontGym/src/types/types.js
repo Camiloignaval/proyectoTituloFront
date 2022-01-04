@@ -8,7 +8,8 @@ export const types = {
 	blockUser: "Admin block user",
 	unblockUser: "Admin unblock user",
 
-	responseRequest: "Admin responseRequest",
+	rejectRequest: "Admin rejectRequest",
+	aceptRequest: "Admin aceptRequest",
 
 	checkValidateUser: "Auth check validate",
 

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./profile.css";
 import {
 	cancelEdit,
+	startBajaCuenta,
 	startChangePass,
 	startEditProfile,
 	startUpdateProfile,
@@ -12,7 +13,6 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-// import { uploadCloudinary } from "../../../helpers/uploadCloudinary";
 import { FormPass } from "./FormPass";
 export const Profile = () => {
 	const dispatch = useDispatch();
@@ -157,6 +157,9 @@ export const Profile = () => {
 						error: "#EA2727",
 						textDark: "#000000",
 						textLight: "#FFFFFF",
+					},
+					frame: {
+						background: "#45454580",
 					},
 					fonts: {
 						default: null,

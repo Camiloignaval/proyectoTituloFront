@@ -31,6 +31,7 @@ const viewClients = (clients) => ({
 });
 
 export const startResponseRequest = (data) => {
+	console.log(data);
 	return async (dispatch) => {
 		const resp = await fetchConToken(
 			`http://localhost:4000/api/admin/requests`,
@@ -39,7 +40,11 @@ export const startResponseRequest = (data) => {
 		);
 		const body = await resp.json();
 		if (body.ok) {
-			dispatch(responseRequest(data.id_usuario));
+			if (data.accion === "rechazar") {
+				dispatch(rejectRequest(data.id_usuario));
+			} else {
+				dispatch(aceptRequest(data.id_usuario));
+			}
 			await Swal.fire("Listo!", body.msg, "success");
 		} else {
 			Swal.fire("Error!", body.msg, "error");
@@ -47,8 +52,12 @@ export const startResponseRequest = (data) => {
 	};
 };
 
-const responseRequest = (datos) => ({
-	type: types.responseRequest,
+const rejectRequest = (datos) => ({
+	type: types.rejectRequest,
+	payload: datos,
+});
+const aceptRequest = (datos) => ({
+	type: types.aceptRequest,
 	payload: datos,
 });
 

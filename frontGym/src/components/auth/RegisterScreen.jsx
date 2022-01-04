@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { validateRUT } from "validar-rut";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { RegionesYcomunas } from "../../Comunas/comunas";
 import { useDispatch } from "react-redux";
 import { cambiarRegistroFalse, startRegister } from "../../actions/auth";
@@ -63,13 +63,17 @@ export const RegisterScreen = () => {
 	});
 
 	const { registro } = useSelector((state) => state.user);
+	const navigate = useNavigate();
+	// pendiente cuando termine el registro redirigir a inicio
 	useEffect(() => {
 		if (registro) {
 			<Navigate to='login' />;
+			navigate("/");
 			dispatch(cambiarRegistroFalse());
 		}
 	}, [registro]);
 
+	// al enviar formulario de registro
 	const onSubmit = (data) => {
 		if (!validateRUT(data.rut)) {
 			document.querySelector(".eRut").innerHTML = "Rut inválido";

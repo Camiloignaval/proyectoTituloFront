@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { startLogin } from "../../actions/auth";
-import { useSelector } from "react-redux";
 
 export const LoginScreen = () => {
 	const dispatch = useDispatch();

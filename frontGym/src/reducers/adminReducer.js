@@ -17,7 +17,19 @@ export const adminReducer = (state = initialState, action) => {
 				...state,
 				clientes: action.payload,
 			};
-		case types.responseRequest: {
+		case types.aceptRequest: {
+			return {
+				...state,
+				clientes: [
+					...state.clientes,
+					state.solicitudes.find((sol) => sol.id_usuario === action.payload),
+				],
+				solicitudes: state.solicitudes.filter(
+					(sol) => sol.id_usuario !== action.payload,
+				),
+			};
+		}
+		case types.rejectRequest: {
 			return {
 				...state,
 				solicitudes: state.solicitudes.filter(

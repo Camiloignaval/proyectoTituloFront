@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { Outlet } from "react-router";
 import { startViewClients, startViewPending } from "../../actions/admin";
 import { SideBar } from "../ui/SideBar";
 

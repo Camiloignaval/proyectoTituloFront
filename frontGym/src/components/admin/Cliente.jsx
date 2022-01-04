@@ -5,11 +5,11 @@ import Swal from "sweetalert2";
 import "moment/locale/es";
 import { startToggleBlock } from "../../actions/admin";
 import "./cliente.css";
-import { fetchSinToken } from "../../hooks/fetch";
+import { fetchConToken } from "../../hooks/fetch";
 
 export const Cliente = ({ cliente: c }) => {
 	const dispatch = useDispatch();
-
+	const { nombre, apellido, email, foto } = c;
 	// bloquear usuario
 	const handleBloq = () => {
 		dispatch(
@@ -33,10 +33,9 @@ export const Cliente = ({ cliente: c }) => {
 		Swal.fire({
 			title: `${c.nombre} ${c.apellido}`,
 			text: "Modal with a custom image.",
-			imageUrl:
-				"https://d500.epimg.net/cincodias/imagenes/2016/07/04/lifestyle/1467646262_522853_1467646344_noticia_normal.jpg",
+			imageUrl: foto,
 			imageWidth: 200,
-			imageHeight: 150,
+			// imageHeight: 150,
 			imageAlt: "Foto perfil",
 			html: ` <table>
 			
@@ -81,13 +80,15 @@ export const Cliente = ({ cliente: c }) => {
 		});
 		if (formValues) {
 			Swal.fire(JSON.stringify("Mensaje enviado"));
-			await fetchSinToken(
+			await fetchConToken(
 				"http://localhost:4000/api/msg/send",
 				{
 					tipo: "recordatorio",
 					mensaje: formValues[1],
 					subject: formValues[0],
-					...c,
+					nombre,
+					apellido,
+					email,
 				},
 				"POST",
 			);
