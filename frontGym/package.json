@@ -34,5 +34,8 @@
 	"devDependencies": {
 		"@vitejs/plugin-react": "^1.0.7",
 		"vite": "^2.7.0"
+	},
+	"eslintConfig": {
+		"extends": "./node_modules/standard/eslintrc.json"
 	}
 }
