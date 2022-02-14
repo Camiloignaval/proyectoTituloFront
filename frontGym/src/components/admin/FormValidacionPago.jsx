@@ -24,7 +24,7 @@ const schema = yup
   })
   .required()
 
-export const FormValidacionPago = ({ pagoSeleccionado, setSelectedPay }) => {
+export const FormValidacionPago = ({ pagoSeleccionado,resetSelect, setSelectedPay }) => {
   const dispatch = useDispatch()
   const {
     register,
@@ -39,7 +39,8 @@ export const FormValidacionPago = ({ pagoSeleccionado, setSelectedPay }) => {
     if ((mont == data.monto && num_cuenta_origen == data.cuenta && moment(fecha_pago).format('l') === moment(data.fecha).format('l'))) {
       dispatch(payValidation({ ...data, id_pago }))
       reset()
-      setSelectedPay('')
+      resetSelect()
+      setSelectedPay([])
     } else {
       Swal.fire({
         position: 'center',
