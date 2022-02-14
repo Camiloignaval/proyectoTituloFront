@@ -3,7 +3,8 @@ import { types } from '../types/types'
 
 const initialState = {
   clientes: [],
-  solicitudes: []
+  solicitudes: [],
+  payRequest: []
 }
 
 export const adminReducer = (state = initialState, action) => {
@@ -59,6 +60,16 @@ export const adminReducer = (state = initialState, action) => {
           }
           return c
         })
+      }
+    case types.viewPayRequest:
+      return {
+        ...state,
+        payRequest: action.payload
+      }
+    case types.validatePayRequest:
+      return {
+        ...state,
+        payRequest: state.payRequest.filter((p) => p.id_pago !== action.payload)
       }
     default:
       return state

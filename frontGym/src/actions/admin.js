@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import Swal from 'sweetalert2'
 import { fetchConToken } from '../hooks/fetch'
 import { types } from '../types/types'
@@ -112,4 +113,50 @@ export const startPagoPresencial = (datos) => {
       console.log('error')
     }
   }
+  // traer solicitudes de pago
 }
+export const startPayRequest = () => {
+  return async (dispatch) => {
+    const resp = await fetchConToken(
+      'http://localhost:4000/api/admin/payrequest')
+    const body = await resp.json()
+    if (body.ok) {
+      dispatch(listaPagos(body.datos))
+    } else {
+      Swal.fire('Error!', body.msg, 'error')
+      console.log('error')
+    }
+  }
+}
+
+const listaPagos = (datos) => ({
+  type: types.viewPayRequest,
+  payload: datos
+})
+
+export const payValidation = (data) => {
+  const { id_pago } = data
+  return async (dispatch) => {
+    const resp = await fetchConToken('http://localhost:4000/api/admin/validatePay', { idPago: id_pago }, 'PUT')
+    const body = await resp.json()
+    // console.log(body)
+    if (body.ok) {
+      dispatch(validatePay(id_pago))
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: body.msg,
+        showConfirmButton: false,
+        timer: 1500
+      })
+    } else {
+      Swal.fire('Error!', body.msg, 'error')
+      console.log('error')
+    }
+  }
+}
+
+const validatePay = (datos) => ({
+  type: types.validatePayRequest,
+  payload: datos
+})

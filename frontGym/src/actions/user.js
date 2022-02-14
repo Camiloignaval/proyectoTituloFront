@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2'
 import { fetchConToken } from '../hooks/fetch'
-import { types } from '../types/types'
+// import { types } from '../types/types'
 
 export const starttranserencia = (datos) => {
   return async (dispatch) => {

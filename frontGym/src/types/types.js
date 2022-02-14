@@ -31,5 +31,7 @@ export const types = {
 
   finishChecking: 'Finish login cheking',
 
-  pagoPresencial: 'Ingreso pago presencial'
+  pagoPresencial: 'Ingreso pago presencial',
+  viewPayRequest: 'view Pay request',
+  validatePayRequest: 'validate Pay request'
 }
