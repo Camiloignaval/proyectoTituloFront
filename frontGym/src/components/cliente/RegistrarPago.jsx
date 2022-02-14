@@ -49,7 +49,7 @@ export const RegistrarPago = () => {
   return (
     <>
       {/* <Nav /> */}
-      <div className='container mt-5'>
+      <div className='container pt-5'>
         <div className='d-flex justify-content-center h-100'>
           <div className='card'>
             <div className='card-header'>
@@ -67,9 +67,10 @@ export const RegistrarPago = () => {
                   <select
                     className='custom-select mr-sm-2 tipoUser'
                     id='inlineFormCustomSelect'
+                    defaultValue=''
                     {...register('banco')}
                   >
-                    <option value='' selected>
+                    <option defaultValue='' value='' selected>
                       Banco de origen
                     </option>
                     {

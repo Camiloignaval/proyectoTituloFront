@@ -16,7 +16,7 @@ const schema = yup.object({
 }).required()
 
 export const PagoPresencial = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   })
   const rut = useRef()
@@ -29,6 +29,7 @@ export const PagoPresencial = () => {
     } else {
       data.rut = data.rut.replace(/[.-]/gm, '')
       dispatch(startPagoPresencial(data))
+      reset()
     }
   }
 

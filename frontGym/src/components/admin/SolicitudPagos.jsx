@@ -27,7 +27,7 @@ export const SolicitudPagos = () => {
           </select>
 
           {(selectedPay !== '') &&
-            <FormValidacionPago pagoSeleccionado={selectedPay} setSolicitudes={setSolicitudesPago} />}
+            <FormValidacionPago pagoSeleccionado={selectedPay} setSelectedPay={setSelectedPay} />}
           </>
         : <h1 className='mt-5 text-center'>No existen solicitudes en este momento</h1>}
     </>

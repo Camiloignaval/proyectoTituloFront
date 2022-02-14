@@ -5,7 +5,8 @@ import { SideBar } from '../ui/SideBar'
 export const DashboardCliente = () => {
   const itemsSidebar = [
     { nombre: 'Perfil', to: 'perfil', icon: 'fas fa-address-card' },
-    { nombre: 'Registrar pago', to: 'pago', icon: 'fas fa-dollar-sign' }
+    { nombre: 'Registrar pago', to: 'pago', icon: 'fas fa-dollar-sign' },
+    { nombre: 'Mis finanzas', to: 'estado', icon: 'fas fa-dollar-sign' }
   ]
   return (
     <div>
