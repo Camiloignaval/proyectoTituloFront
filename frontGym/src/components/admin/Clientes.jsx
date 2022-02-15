@@ -7,6 +7,7 @@ import { Cliente } from './Cliente'
 export const Clientes = () => {
   const navigate = useNavigate()
   const { clientes } = useSelector((state) => state.admin)
+
   useEffect(() => {
     if (clientes.length === 0) {
       Swal.fire('Lo sentimos', 'No tiene clientes', 'info')

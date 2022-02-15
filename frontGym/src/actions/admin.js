@@ -160,3 +160,9 @@ const validatePay = (datos) => ({
   type: types.validatePayRequest,
   payload: datos
 })
+
+export const emailAtrasados= () => {
+  return async () => {
+    const resp= await fetchConToken('http://localhost:4000/api/admin/pagosatrasados')
+  }
+}
