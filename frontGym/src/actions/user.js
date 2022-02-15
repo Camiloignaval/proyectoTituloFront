@@ -1,5 +1,6 @@
 import Swal from 'sweetalert2'
 import { fetchConToken } from '../hooks/fetch'
+import { types } from '../types/types'
 // import { types } from '../types/types'
 
 export const starttranserencia = (datos) => {
@@ -29,3 +30,25 @@ export const starttranserencia = (datos) => {
     }
   }
 }
+
+export const startBringPays= (id) => {
+  return async (dispatch) => {
+    const resp = await fetchConToken(
+      `http://localhost:4000/api/user/pagos${id}`
+    )
+    const {ok,data:{pagos,estado}}= await resp.json()
+    const {estado_financiero}=estado[0]
+    dispatch(setEstado(estado_financiero))
+    dispatch(setPagos(pagos))
+  }
+}
+
+const setEstado = (estado)=> ({
+  type: types.setEstadoFinanciero,
+  payload: estado
+})
+
+const setPagos = (pagos)=> ({
+  type: types.setPagos,
+  payload: pagos
+})

@@ -33,5 +33,9 @@ export const types = {
 
   pagoPresencial: 'Ingreso pago presencial',
   viewPayRequest: 'view Pay request',
-  validatePayRequest: 'validate Pay request'
+  validatePayRequest: 'validate Pay request',
+
+  setEstadoFinanciero: 'setEstadoFinanciero',
+
+  setPagos: 'set Pagos user'
 }

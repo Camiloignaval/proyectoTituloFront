@@ -11,8 +11,11 @@ const initialState = {
     rut: null,
     id_cargo: null,
     foto: null,
-    telefono: null
+    telefono: null,
+    estado_financiero:null
+    
   },
+  pagos:[],
   active: false,
   editMode: false,
   checking: true,
@@ -95,6 +98,22 @@ export const authReducer = (state = initialState, action) => {
           ...state.info,
           foto: action.payload
         }
+      }
+    }
+    case types.setEstadoFinanciero: {
+      return {
+        ...state,
+        info:{
+          ...state.info,
+          estado_financiero:action.payload
+        }
+      }
+    }
+
+    case types.setPagos:{
+      return {
+        ...state,
+        pagos: action.payload
       }
     }
 
