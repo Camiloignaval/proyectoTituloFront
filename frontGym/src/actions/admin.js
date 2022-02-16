@@ -164,5 +164,18 @@ const validatePay = (datos) => ({
 export const emailAtrasados= () => {
   return async () => {
     const resp= await fetchConToken('http://localhost:4000/api/admin/pagosatrasados')
+    const body=await resp.json()
+    if(body.ok){
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: body.msg,
+        showConfirmButton: false,
+        timer: 1500
+      })
+    } else {
+      Swal.fire('Error!', body.msg, 'error')
+      console.log('error')
+    }
   }
 }

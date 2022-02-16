@@ -7,10 +7,7 @@ moment.locale('es');         // en
 export const TablaPagos = ({pagos}) => {
   return (
       <>
-      <h2 className='text-center mb-4'>Historial de pagos</h2>
-
-
-      
+      <h2 className='text-center mb-4'>Historial de pagos</h2>    
     <table className="table table-dark">
   <thead>
     <tr>
