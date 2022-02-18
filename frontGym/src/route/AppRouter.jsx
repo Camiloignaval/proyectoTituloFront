@@ -2,9 +2,8 @@
 /* eslint-disable camelcase */
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { startCheking } from '../actions/auth'
-import { DashboardCliente } from '../components/cliente/DashboardCliente'
 import { AdminRoutes } from './AdminRoutes'
 import {
   PrivateRouteUser,
@@ -75,6 +74,7 @@ export const AppRouter = () => {
               </PrivateRoutePersonal>
 }
           />
+ 
         </Routes>
       </BrowserRouter>
     </>

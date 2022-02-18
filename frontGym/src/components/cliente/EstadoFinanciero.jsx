@@ -9,7 +9,9 @@ export const EstadoFinanciero = () => {
    const {info:{estado_financiero,id_usuario},pagos}= useSelector(state=>state.user)
 
    useEffect(() => {
-     dispatch(startBringPays(id_usuario))
+         setTimeout(() => {
+            dispatch(startBringPays(id_usuario)) 
+         }, 0.1);
    }, [])
    
   return (

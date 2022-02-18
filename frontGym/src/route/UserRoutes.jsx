@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { DashboardCliente } from '../components/cliente/DashboardCliente'
 import { EstadoFinanciero } from '../components/cliente/EstadoFinanciero'
 import { RegistrarPago } from '../components/cliente/RegistrarPago'
@@ -12,7 +12,10 @@ export const UserRoutes = () => {
         <Route path='perfil' element={<Profile />} />
         <Route path='pago' element={<RegistrarPago />} />
         <Route path='estado' element={<EstadoFinanciero />} />
+        <Route path='*' element={<Navigate to='/user'/>}/>
       </Route>
+      <Route path='*' element={<Navigate to='/user'/>}/>
+
     </Routes>
   )
 }

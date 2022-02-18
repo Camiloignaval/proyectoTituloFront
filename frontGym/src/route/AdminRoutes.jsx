@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { DashboardAdmin } from '../components/admin/DashboardAdmin'
 import { Finanzas } from '../components/admin/Finanzas'
 import { PagoPresencial } from '../components/admin/PagoPresencial'
@@ -20,7 +20,9 @@ export const AdminRoutes = () => {
         <Route path='finanzas' element={<Finanzas />}>
           <Route path='presencial' element={<PagoPresencial />} />
           <Route path='solpagos' element={<SolicitudPagos />} />
+          <Route path='*' element={<Navigate to='/admin'/>}/>
         </Route>
+        <Route path='*' element={<Navigate to='/admin'/>}/>
       </Route>
     </Routes>
   )

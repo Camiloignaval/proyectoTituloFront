@@ -15,7 +15,6 @@ export const TablaInfo = ({ necesarios }) => {
   const info = useSelector((state) => state.admin)
 
   useEffect(() => {
-    console.log('hola');
     dispatch(startViewClients())
   }, [])
 
