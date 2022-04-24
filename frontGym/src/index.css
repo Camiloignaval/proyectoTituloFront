@@ -73,7 +73,16 @@ input:focus {
 
 .login_btn:hover {
 	color: black;
-	background-color: white;
+	background-color: #ffab0f;
+}
+.massive_btn {
+	color: black;
+	background-color: #ffc312;
+}
+
+.massive_btn:hover {
+	color: black;
+	background-color: #ffab0f;
 }
 
 .links {

@@ -2,6 +2,7 @@ import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { DashboardAdmin } from '../components/admin/DashboardAdmin'
 import { Finanzas } from '../components/admin/Finanzas'
+import { Mensajeria } from '../components/ui/Mensajeria'
 import { PagoPresencial } from '../components/admin/PagoPresencial'
 import { SolicitudPagos } from '../components/admin/SolicitudPagos'
 import { TablaInfo } from '../components/admin/TablaInfo'
@@ -17,6 +18,7 @@ export const AdminRoutes = () => {
           element={<TablaInfo necesarios='solicitudes' />}
         />
         <Route path='clientes' element={<TablaInfo necesarios='clientes' />} />
+        <Route path='message' element={<Mensajeria />}/>
         <Route path='finanzas' element={<Finanzas />}>
           <Route path='presencial' element={<PagoPresencial />} />
           <Route path='solpagos' element={<SolicitudPagos />} />

@@ -18,8 +18,11 @@ export const PublicRoute = ({ children, auth, cargo }) => {
           setPathName(pathAnterior)
           localStorage.setItem('location',pathAnterior)
         }
-      }
-      if(cargo===3){
+      }if(cargo===2){
+        if(pathAnterior){
+        setPathName(pathAnterior)
+        localStorage.setItem('location',pathAnterior)
+      } }if(cargo===3){
         if(pathAnterior){
         setPathName(pathAnterior)
         localStorage.setItem('location',pathAnterior)
@@ -31,6 +34,8 @@ export const PublicRoute = ({ children, auth, cargo }) => {
      setPathName('/admin')
    } if(cargo===3){
     setPathName('/user')
+  }if(cargo===2){
+    setPathName('/personal')
   }
   }
 

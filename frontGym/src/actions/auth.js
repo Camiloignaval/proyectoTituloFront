@@ -200,3 +200,27 @@ export const sendChangePass = (data) => {
 		}
 	};
 };
+
+// enviar mensaje
+export const sendMessage= (data) => {
+  return async (dispatch) => {
+	const resp = await fetchConToken(
+		"http://localhost:4000/api/msg/intercambioMsg",
+		data,
+		"POST",
+	);
+	const body = await resp.json();
+	if (body.ok) {
+		Swal.fire({
+			position: "center",
+			icon: "success",
+			title: body.msg,
+			showConfirmButton: false,
+			timer: 1500,
+		});
+		dispatch({ type: types.cancelChangePass });
+	} else {
+		Swal.fire("oh oh!", body.msg, "error");
+	}
+  }
+}

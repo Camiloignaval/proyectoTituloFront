@@ -6,7 +6,7 @@ import { types } from '../types/types'
 export const starttranserencia = (datos) => {
   return async (dispatch) => {
     const resp = await fetchConToken(
-      'http://localhost:4000/api/user/pagoefectivo',
+      'http://localhost:4000/api/user/pagotransferencia',
       datos,
       'POST'
     )

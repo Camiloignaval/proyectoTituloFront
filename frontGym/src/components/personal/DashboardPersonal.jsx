@@ -4,7 +4,9 @@ import { SideBar } from '../ui/SideBar'
 
 export const DashboardPersonal = () => {
   const itemsSidebar = [
-    { nombre: 'Perfil', to: 'perfil', icon: 'fas fa-address-card' }
+    { nombre: 'Perfil', to: 'perfil', icon: 'fas fa-address-card' },
+    { nombre: 'Mensajeria', to: 'message', icon: 'fas fa-envelope' }
+
   ]
   return (
     <div>

@@ -42,6 +42,7 @@ export const RegistrarPago = () => {
   const { info: { id_usuario } } = useSelector(state => state.user)
   // al enviar formulario de registro
   const onSubmit = (data) => {
+    console.log(data)
     data.idUsuario = id_usuario
     dispatch(starttranserencia(data))
   }
