@@ -11,7 +11,7 @@ import { sendMessage } from '../../actions/auth';
 var grocerias = ["puta", "puto","marica","conchetumadre","ctm"]
 
 
-export const Mensajeria = ({optionsDestinatary}) => {
+export const Mensajeria = () => {
   const [isMassive, setIsMassive] = useState(false)
   const { clientes } = useSelector((state) => state?.admin);
   const { info:{id_cargo,entrenador,id_usuario} } = useSelector((state) => state?.user);
@@ -35,6 +35,7 @@ export const Mensajeria = ({optionsDestinatary}) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(schema)
@@ -69,8 +70,8 @@ useEffect(async() => {
 				Swal.fire("Atención", "Su mensaje incluye contenido no apropiado, favor borrar para continuar", "info");
     }else{
       if(data.id_destinatario!=='Escoja destinatario' || isMassive){
-        // TODO enviar peticion
         dispatch(sendMessage({cargo:id_cargo,id_usuario,...data,isMassive}))
+        reset()
         document.querySelector('.errorDestinatario').innerHTML=''
       }else{
         document.querySelector('.errorDestinatario').innerHTML='Favor escoger destinatario'
