@@ -179,3 +179,93 @@ export const emailAtrasados= () => {
     }
   }
 }
+
+export const guardarHorarios= (data) => {
+  return async () => {
+    const resp= await fetchConToken('http://localhost:4000/api/admin/schedules',data,'POST')
+    const body=await resp.json()
+    if(body.ok){
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: body.msg,
+        showConfirmButton: false,
+        timer: 1500
+      })
+    } else {
+      Swal.fire('Error!', body.msg, 'error')
+      console.log('error')
+    }
+  }
+}
+export const obtenerHorarios= () => {
+  return async (dispatch) => {
+    const resp= await fetchConToken('http://localhost:4000/api/admin/schedules')
+    const body=await resp.json()
+    if(body.ok){
+     dispatch(savedSchedules(body.response))
+    } else {
+      Swal.fire('Error!', body.msg, 'error')
+      console.log('error')
+    }
+  }
+}
+const savedSchedules = (datos) => ({
+  type: types.savedSchedules,
+  payload: datos
+})
+
+
+export const guardarCausas= (data) => {
+  return async () => {
+    const resp= await fetchConToken('http://localhost:4000/api/admin/hoursblock',data,'POST')
+    const body=await resp.json()
+    if(body.ok){
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: body.msg,
+        showConfirmButton: false,
+        timer: 1500
+      })
+    } else {
+      Swal.fire('Error!', body.msg, 'error')
+      console.log('error')
+    }
+  }
+}
+export const obtenerCausas= (data) => {
+  return async (dispatch) => {
+    const resp= await fetchConToken('http://localhost:4000/api/admin/hoursblock')
+    const body=await resp.json()
+    if(body.ok){
+      dispatch(obtainHorasBloqueadas(body.response))
+
+    } else {
+      Swal.fire('Error!', body.msg, 'error')
+      console.log('error')
+    }
+  }
+}
+export const eliminarCausa= (data) => {
+  return async (dispatch) => {
+    const resp= await fetchConToken('http://localhost:4000/api/admin/hoursblock',data,'DELETE')
+    const body=await resp.json()
+    if(body.ok){
+      dispatch(deleteHorasBloqueadas(data?.id_bloqueo))
+      Swal.fire('Borrado', body.msg, 'success')
+    } else {
+      Swal.fire('Error!', body.msg, 'error')
+      console.log('error')
+    }
+  }
+}
+
+const obtainHorasBloqueadas = (datos) => ({
+  type: types.obtainBLockHours,
+  payload: datos
+})
+const deleteHorasBloqueadas = (datos) => ({
+  type: types.deleteBLockHours,
+  payload: datos
+})

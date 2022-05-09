@@ -4,7 +4,9 @@ import { types } from '../types/types'
 const initialState = {
   clientes: [],
   solicitudes: [],
-  payRequest: []
+  payRequest: [],
+  schedules:[],
+  blockHours:[]
 }
 
 export const adminReducer = (state = initialState, action) => {
@@ -70,6 +72,22 @@ export const adminReducer = (state = initialState, action) => {
       return {
         ...state,
         payRequest: state.payRequest.filter((p) => p.id_pago !== action.payload)
+      }
+
+    case types.savedSchedules:
+      return {
+        ...state,
+        schedules:action.payload
+      }
+    case types.obtainBLockHours:
+      return {
+        ...state,
+        blockHours:action.payload
+      }
+    case types.deleteBLockHours:
+      return {
+        ...state,
+        blockHours:state.blockHours.filter((p)=>p.id_bloqueo_hora!== action.payload)
       }
     default:
       return state

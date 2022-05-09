@@ -37,5 +37,9 @@ export const types = {
 
   setEstadoFinanciero: 'setEstadoFinanciero',
 
-  setPagos: 'set Pagos user'
+  setPagos: 'set Pagos user',
+
+  savedSchedules:' obtain saved schedules',
+  obtainBLockHours:'obtain block hours',
+  deleteBLockHours:'delete specificly cause'
 }

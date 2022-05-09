@@ -18,7 +18,8 @@ export const DashboardAdmin = () => {
     { nombre: 'Clientes', to: 'clientes', icon: 'fas fa-users' },
     { nombre: 'Solicitudes', to: 'solicitudes', icon: 'fas fa-bell' },
     { nombre: 'Finanzas', to: 'finanzas', icon: 'fas fa-dollar-sign' },
-    { nombre: 'Mensajeria', to: 'message', icon: 'fas fa-envelope' }
+    { nombre: 'Mensajeria', to: 'message', icon: 'fas fa-envelope' },
+    { nombre: 'Horarios', to: 'schedules', icon: 'fas fa-clock' }
   ]
 
   return (

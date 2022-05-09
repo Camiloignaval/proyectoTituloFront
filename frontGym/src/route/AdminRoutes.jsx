@@ -7,6 +7,7 @@ import { PagoPresencial } from '../components/admin/PagoPresencial'
 import { SolicitudPagos } from '../components/admin/SolicitudPagos'
 import { TablaInfo } from '../components/admin/TablaInfo'
 import { Profile } from '../components/ui/Profile'
+import { Horarios } from '../components/admin/Horarios'
 
 export const AdminRoutes = () => {
   return (
@@ -19,6 +20,7 @@ export const AdminRoutes = () => {
         />
         <Route path='clientes' element={<TablaInfo necesarios='clientes' />} />
         <Route path='message' element={<Mensajeria />}/>
+        <Route path='schedules' element={<Horarios />}/>
         <Route path='finanzas' element={<Finanzas />}>
           <Route path='presencial' element={<PagoPresencial />} />
           <Route path='solpagos' element={<SolicitudPagos />} />
