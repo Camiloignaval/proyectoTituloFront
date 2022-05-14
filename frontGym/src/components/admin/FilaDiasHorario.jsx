@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { useSelector } from "react-redux";
-
-const array24h = Array.from({ length: 24 }, (v, i) =>
-  i.toString().split("").length === 1 ? `0${i}:00` : `${i}:00`
-);
+import { array24h } from "../../helpers/arrayHorasDia";
 
 export const FilaDiasHorario = ({ dia, horariosSemana, setHorariosSemana }) => {
   const { schedules } = useSelector((state) => state.admin);
