@@ -123,3 +123,7 @@ a:hover {
 .tipoUser {
 	margin-right: 0px !important;
 }
+
+option:disabled {
+	background: #ccc;
+  }

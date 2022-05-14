@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
+import toast from 'react-hot-toast'
 import Swal from 'sweetalert2'
 import { fetchConToken } from '../hooks/fetch'
 import { types } from '../types/types'
-
 export const startViewPending = () => {
   return async (dispatch) => {
     const resp = await fetchConToken(
@@ -228,6 +228,7 @@ export const guardarCausas= (data) => {
         showConfirmButton: false,
         timer: 1500
       })
+      return body
     } else {
       Swal.fire('Error!', body.msg, 'error')
       console.log('error')
@@ -254,6 +255,7 @@ export const eliminarCausa= (data) => {
     if(body.ok){
       dispatch(deleteHorasBloqueadas(data?.id_bloqueo))
       Swal.fire('Borrado', body.msg, 'success')
+      return body
     } else {
       Swal.fire('Error!', body.msg, 'error')
       console.log('error')

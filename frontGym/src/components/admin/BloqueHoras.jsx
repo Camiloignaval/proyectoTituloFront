@@ -1,11 +1,16 @@
-import { useDispatch } from "react-redux";
-import { guardarCausas } from "../../actions/admin";
 import { HoraBloqueada } from "./HoraBloqueada";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 
 export const BloquearHoras = ({ blockHours }) => {
-  const dispatch = useDispatch();
-  const [count, setCount] = useState([1, 2]);
+  const [count, setCount] = useState([]);
+  const [horasBloqueadas, setHorasBloqueadas] = useState([])
+
+  useEffect(() => {
+    setCount(blockHours.map((b,i)=>i+1))
+    setHorasBloqueadas(blockHours.map(b=>b?.hora.slice(0,5)))
+  }, [blockHours])
+  
 
   return (
     <div className="mt-4">
@@ -16,6 +21,8 @@ export const BloquearHoras = ({ blockHours }) => {
           key={i}
           pos={i}
           blockHours={blockHours}
+          horasBloqueadas={horasBloqueadas}
+           setHorasBloqueadas={setHorasBloqueadas}
         />
       ))}
       <div className="contBtnPlusCause d-flex justify-content-center">

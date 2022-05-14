@@ -20,6 +20,7 @@ const dias = [
 export const Horarios = () => {
   const { blockHours } = useSelector((state) => state.admin);
   const [horariosSemana, setHorariosSemana] = useState({});
+  const [horasDisponibles, sethorasDisponibles] = useState()
   const [isSend, setIsSend] = useState(false);
   const dispatch = useDispatch();
 
