@@ -1,4 +1,4 @@
-/* @import 'antd/dist/antd.dark.css'; */
+@import 'antd/dist/antd.dark.css';
 
 html,
 body {
@@ -140,11 +140,7 @@ option:disabled {
 	  height: 40px;
 	  border-radius: 5px !important;
   }
-    /* 
-  .ant-picker-input input::placeholder,.ant-picker-input,.ant-picker-suffix,.ant-picker-clear{
-	  color: black !important;
-	  background-color: transparent;
-  } */
+
  
   .contRegistrar{
 	  position: absolute;
@@ -152,9 +148,9 @@ option:disabled {
 	  top: 50px;
   }
 
-  h1,h2,h3,h4,h5,h6{
+  /* h1,h2,h3,h4,h5,h6{
 	color:black !important
-  }
+  } */
   .advRut{
 	  position: absolute;
 	  bottom:-18px;

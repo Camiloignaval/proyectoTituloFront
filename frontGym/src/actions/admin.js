@@ -242,6 +242,7 @@ export const obtenerCausas= (data) => {
     const body=await resp.json()
     if(body.ok){
       dispatch(obtainHorasBloqueadas(body.response))
+      return body
 
     } else {
       Swal.fire('Error!', body.msg, 'error')
@@ -283,5 +284,18 @@ export const consultAssistance= (rut) => {
     } else {
       alertSwal(false,body.msg,2000)
     }
+  }
+}
+
+export const getReserves= (date) => {
+  return async () => {
+    const resp= await fetchConToken(`http://localhost:4000/api/admin/reserves${date}`)
+    const body=await resp.json()
+    if(body.ok){
+    } else {
+      alertSwal(false,body.msg,2000)
+    }
+    return body
+
   }
 }

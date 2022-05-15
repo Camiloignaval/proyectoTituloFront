@@ -12,6 +12,7 @@ import {
 import { alertSwal } from "../../helpers/swal";
 import { Button, DatePicker } from "antd";
 import moment from "moment";
+import { obtenerCausas } from "../../actions/admin";
 // import "antd/dist/antd.dark.css";
 // import "antd/styles/reset.css";
 moment.locale("es");
@@ -37,7 +38,7 @@ export const Reservas = () => {
   const [hour, setHour] = useState("");
   const [horasDisponibles, setHorasDisponibles] = useState([]);
   const [diasCerrados, setDiasCerrados] = useState([]);
-  const [tieneHora, setTieneHora] = useState(false);
+  const [hoursBLocked, sethoursBLocked] = useState([]);
 
   // obtener dias cerrado
   useEffect(() => {
@@ -50,7 +51,13 @@ export const Reservas = () => {
   }, []);
   // obtener hora reservada
   useEffect(() => {
-    dispatch(getReserveHour(id_usuario));
+    (async () => {
+      dispatch(getReserveHour(id_usuario));
+      const resp = await dispatch(obtenerCausas());
+      if (resp?.ok) {
+        sethoursBLocked(resp?.response.map((r) => r?.hora?.slice(0, 5)));
+      }
+    })();
   }, []);
 
   // estblecer horarios permitidos para seleccionar
@@ -130,7 +137,7 @@ export const Reservas = () => {
             {horasDisponibles.map((a, i) => (
               <option
                 key={i}
-                disabled={Number(a.aforo) < 1}
+                disabled={Number(a.aforo) < 1 || hoursBLocked.includes(a?.hora)}
                 value={a.hora}
               >{`${a.hora} (${a.aforo} cupos)`}</option>
             ))}

@@ -23,7 +23,7 @@ export const RegistrarAsistencia = () => {
     <>
       <button
         type="button"
-        className="btn btn-primary"
+        className="btn btn-warning"
         data-toggle="modal"
         data-target="#modalHoras"
         classNameName="btn login_btn"
