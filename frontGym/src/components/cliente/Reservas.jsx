@@ -12,7 +12,8 @@ import {
 import { alertSwal } from "../../helpers/swal";
 import { Button, DatePicker } from "antd";
 import moment from "moment";
-import "antd/dist/antd.dark.css";
+// import "antd/dist/antd.dark.css";
+// import "antd/styles/reset.css";
 moment.locale("es");
 
 const objDias = {
@@ -109,8 +110,10 @@ export const Reservas = () => {
           <DatePicker
             style={{ marginRight: "20px" }}
             disabledDate={disabledDate}
-            onChange={onChange} /* min={dayjs().format('YYYY-MM-DD')} */
-            //   showTime={{ defaultValue: moment("00:00:00", "HH:mm:ss") }}
+            onChange={onChange}
+            allowClear={false}
+            popupStyle={{ backgroundColor: "white" }}
+            suffixIcon
           />
           <select
             disabled={date === ""}

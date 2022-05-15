@@ -7,6 +7,7 @@ import {
 } from "../../actions/admin";
 import { BloquearHoras } from "./BloqueHoras";
 import { FilaDiasHorario } from "./FilaDiasHorario";
+import { RegistrarAsistencia } from "./RegistrarAsistencia";
 
 const dias = [
   "Lunes",
@@ -20,7 +21,7 @@ const dias = [
 export const Horarios = () => {
   const { blockHours } = useSelector((state) => state.admin);
   const [horariosSemana, setHorariosSemana] = useState({});
-  const [horasDisponibles, sethorasDisponibles] = useState()
+  const [horasDisponibles, sethorasDisponibles] = useState();
   const [isSend, setIsSend] = useState(false);
   const dispatch = useDispatch();
 
@@ -53,8 +54,11 @@ export const Horarios = () => {
   };
 
   return (
-    <div className="container pt-4">
+    <div className="container pt-4 contHorariosAdmin">
       <h1 className="text-center pb-4">Gestión de horarios</h1>
+      <div className="contRegistrar">
+        <RegistrarAsistencia />
+      </div>
       {dias.map((d, i) => (
         <FilaDiasHorario
           key={i}

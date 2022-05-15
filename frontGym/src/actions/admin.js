@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import toast from 'react-hot-toast'
 import Swal from 'sweetalert2'
+import { alertSwal } from '../helpers/swal'
 import { fetchConToken } from '../hooks/fetch'
 import { types } from '../types/types'
 export const startViewPending = () => {
@@ -271,3 +272,16 @@ const deleteHorasBloqueadas = (datos) => ({
   type: types.deleteBLockHours,
   payload: datos
 })
+
+export const consultAssistance= (rut) => {
+  return async () => {
+    const resp= await fetchConToken('http://localhost:4000/api/admin/consultassistance',{rut},'POST')
+    const body=await resp.json()
+    if(body.ok){
+      alertSwal(true,body.msg,2000)
+      return body
+    } else {
+      alertSwal(false,body.msg,2000)
+    }
+  }
+}
