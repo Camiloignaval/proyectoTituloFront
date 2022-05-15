@@ -19,7 +19,9 @@ const initialState = {
   active: false,
   editMode: false,
   checking: true,
-  changePass: false
+  changePass: false,
+  haveReserve:false,
+  datosReserve:{}
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -114,6 +116,20 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         pagos: action.payload
+      }
+    }
+    case types.setReserveHour:{
+      return {
+        ...state,
+        haveReserve: true,
+        datosReserve: action.payload
+      }
+    }
+    case types.deleteReserveHour:{
+      return {
+        ...state,
+        haveReserve: false,
+        datosReserve: {}
       }
     }
 

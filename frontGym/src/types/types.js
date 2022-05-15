@@ -41,5 +41,9 @@ export const types = {
 
   savedSchedules:' obtain saved schedules',
   obtainBLockHours:'obtain block hours',
-  deleteBLockHours:'delete specificly cause'
+  deleteBLockHours:'delete specificly cause',
+
+  setReserveHour:'reserve hour by client',
+  setNoReserveHour:'no reserve  hour by client',
+  deleteReserveHour:'delete hour by client'
 }

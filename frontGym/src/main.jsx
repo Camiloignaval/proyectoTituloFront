@@ -6,13 +6,17 @@ import "./index.css";
 import { AppRouter } from "./route/AppRouter";
 import { store } from "./store/store";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import dayjs from "dayjs";
 
+import { es } from 'dayjs/locale/es'
+// import dayjs from 'dayjs';
+
+dayjs.locale('es')
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
   },
 });
-
 moment.locale("es", {
   months:
     "Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre".split(

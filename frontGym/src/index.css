@@ -127,3 +127,13 @@ a:hover {
 option:disabled {
 	background: #ccc;
   }
+
+.ant-picker{
+	  height: 40px;
+	  border-radius: 5px !important;
+  }
+    /* 
+  .ant-picker-input input::placeholder,.ant-picker-input,.ant-picker-suffix,.ant-picker-clear{
+	  color: black !important;
+	  background-color: transparent;
+  } */
