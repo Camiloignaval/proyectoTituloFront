@@ -85,6 +85,7 @@ export const getReserveHour= (id) => {
     }else{
       dispatch(setNoReserve())
     }
+
   }
 }
 
@@ -94,6 +95,7 @@ const setNoReserve = ()=> ({
 })
 
 export const deleteReserve= (id) => {
+  console.log(id)
   return async (dispatch) => {
     const resp = await fetchConToken(
       `http://localhost:4000/api/user/reserve`,{id},'DELETE'
@@ -103,6 +105,7 @@ export const deleteReserve= (id) => {
     if(body.ok){
      dispatch(deletReserve())
     }
+    console.log(body)
   }
 }
 

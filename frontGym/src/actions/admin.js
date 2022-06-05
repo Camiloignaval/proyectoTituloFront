@@ -278,6 +278,7 @@ export const consultAssistance= (rut) => {
   return async () => {
     const resp= await fetchConToken('http://localhost:4000/api/admin/consultassistance',{rut},'POST')
     const body=await resp.json()
+    console.log(body)
     if(body.ok){
       alertSwal(true,body.msg,2000)
       return body

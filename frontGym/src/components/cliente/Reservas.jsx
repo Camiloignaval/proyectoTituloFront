@@ -99,7 +99,7 @@ export const Reservas = () => {
   function disabledDate(current) {
     return (
       diasCerrados.includes(moment(current).day()) ||
-      current.valueOf() < Date.now()
+      current.valueOf() < moment().subtract(1, "day")
     );
   }
 
@@ -108,7 +108,7 @@ export const Reservas = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container contReservasuser">
       <h1 className="text-center pt-5 s">Reservas</h1>
 
       {!haveReserve ? (

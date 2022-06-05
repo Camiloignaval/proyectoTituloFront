@@ -4,7 +4,14 @@ import { useDispatch } from "react-redux";
 import { eliminarCausa, guardarCausas } from "../../actions/admin";
 import { array24h } from "../../helpers/arrayHorasDia";
 
-export const HoraBloqueada = ({ setCount, count, blockHours = [], pos,horasBloqueadas, setHorasBloqueadas }) => {
+export const HoraBloqueada = ({
+  setCount,
+  count,
+  blockHours = [],
+  pos,
+  horasBloqueadas,
+  setHorasBloqueadas,
+}) => {
   const dispatch = useDispatch();
   const [dataInBDD, setdataInBDD] = useState();
   const [isDisabeld, setisDisabeld] = useState(true);
@@ -30,18 +37,18 @@ export const HoraBloqueada = ({ setCount, count, blockHours = [], pos,horasBloqu
     }
   }, [dataInBDD]);
 
-  const handleSave = async() => {
-    const resp= await dispatch(guardarCausas(causa));
-    if(resp?.ok){
+  const handleSave = async () => {
+    const resp = await dispatch(guardarCausas(causa));
+    if (resp?.ok) {
       setIsSaved(true);
-      setdataInBDD(resp?.response[0])
-      setHorasBloqueadas([...horasBloqueadas,causa?.hora])
+      setdataInBDD(resp?.response[0]);
+      setHorasBloqueadas([...horasBloqueadas, causa?.hora]);
     }
     // TODO traer id para que se pueda borrar!
   };
 
-  const handleDelete = (data) => {
-    const resp=dispatch(eliminarCausa({ id_bloqueo: dataInBDD?.id_bloqueo_hora }));
+  const handleDelete = () => {
+    dispatch(eliminarCausa({ id_bloqueo: dataInBDD?.id_bloqueo_hora }));
     const arr = [...count];
     arr.pop();
     setCount(arr);
@@ -70,7 +77,9 @@ export const HoraBloqueada = ({ setCount, count, blockHours = [], pos,horasBloqu
               Seleccione
             </option>
             {array24h.map((a) => (
-              <option disabled={horasBloqueadas.includes(a)}  value={a}>{a}</option>
+              <option disabled={horasBloqueadas.includes(a)} value={a}>
+                {a}
+              </option>
             ))}
           </select>
         </div>

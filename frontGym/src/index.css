@@ -82,6 +82,10 @@ input:focus {
 	color: black;
 	background-color: #ffc312;
 }
+.massive_btnDis {
+	color: black;
+	background-color: #a17d0f;
+}
 
 .massive_btn:hover {
 	color: black;
@@ -155,4 +159,13 @@ option:disabled {
 	  position: absolute;
 	  bottom:-18px;
 	  right: 0px;
+  }
+
+  input{
+	  color: black !important;
+  }
+
+  .contReservasuser input{
+	color: white !important;
+
   }

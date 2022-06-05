@@ -72,7 +72,7 @@ export const Horarios = () => {
           style={{ height: "40px", borderRadius: "8px" }}
           disabled={!isSend}
           onClick={handleSave}
-          className="w-75 massive_btn"
+          className={isSend ? "w-75 massive_btn" : "w-75 massive_btnDis"}
         >
           Guardar
         </button>
