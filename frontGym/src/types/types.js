@@ -1,49 +1,51 @@
 export const types = {
-  sendRequest: 'send register request',
-  resetRegister: 'resetRegister',
+  sendRequest: "send register request",
+  resetRegister: "resetRegister",
 
-  viewRequest: 'Admin viewRequest',
-  viewClients: 'Admin viewClients',
+  viewRequest: "Admin viewRequest",
+  viewClients: "Admin viewClients",
 
-  blockUser: 'Admin block user',
-  unblockUser: 'Admin unblock user',
+  blockUser: "Admin block user",
+  unblockUser: "Admin unblock user",
 
-  rejectRequest: 'Admin rejectRequest',
-  aceptRequest: 'Admin aceptRequest',
+  rejectRequest: "Admin rejectRequest",
+  aceptRequest: "Admin aceptRequest",
 
-  checkValidateUser: 'Auth check validate',
+  checkValidateUser: "Auth check validate",
 
-  login: 'user login',
-  logout: 'user logout',
+  login: "user login",
+  logout: "user logout",
 
-  editProfileOn: 'User start edit profile',
-  editProfileOff: 'User end edit profile',
-  editImg: 'User edit ImgProfile',
+  editProfileOn: "User start edit profile",
+  editProfileOff: "User end edit profile",
+  editImg: "User edit ImgProfile",
 
-  cancelChangePass: 'User end edit pass',
-  startChangePass: 'User start edit pass',
+  cancelChangePass: "User end edit pass",
+  startChangePass: "User start edit pass",
 
-  uploadImg: 'change profile Img',
-  updateProfile: 'User update profile',
-  cancelUpdate: 'User cancel update ',
+  uploadImg: "change profile Img",
+  updateProfile: "User update profile",
+  cancelUpdate: "User cancel update ",
 
-  darDeBaja: 'User da de baja',
+  darDeBaja: "User da de baja",
 
-  finishChecking: 'Finish login cheking',
+  finishChecking: "Finish login cheking",
 
-  pagoPresencial: 'Ingreso pago presencial',
-  viewPayRequest: 'view Pay request',
-  validatePayRequest: 'validate Pay request',
+  pagoPresencial: "Ingreso pago presencial",
+  viewPayRequest: "view Pay request",
+  validatePayRequest: "validate Pay request",
 
-  setEstadoFinanciero: 'setEstadoFinanciero',
+  setEstadoFinanciero: "setEstadoFinanciero",
 
-  setPagos: 'set Pagos user',
+  setPagos: "set Pagos user",
 
-  savedSchedules:' obtain saved schedules',
-  obtainBLockHours:'obtain block hours',
-  deleteBLockHours:'delete specificly cause',
+  savedSchedules: " obtain saved schedules",
+  obtainBLockHours: "obtain block hours",
+  deleteBLockHours: "delete specificly cause",
 
-  setReserveHour:'reserve hour by client',
-  setNoReserveHour:'no reserve  hour by client',
-  deleteReserveHour:'delete hour by client'
-}
+  setReserveHour: "reserve hour by client",
+  setNoReserveHour: "no reserve  hour by client",
+  deleteReserveHour: "delete hour by client",
+
+  sendRoutinePetition: "send routine petition",
+};

@@ -1,4 +1,4 @@
-import { types } from '../types/types'
+import { types } from "../types/types";
 
 const initialState = {
   registro: false,
@@ -12,51 +12,50 @@ const initialState = {
     id_cargo: null,
     foto: null,
     telefono: null,
-    estado_financiero:null
-    
+    estado_financiero: null,
   },
-  pagos:[],
+  pagos: [],
   active: false,
   editMode: false,
   checking: true,
   changePass: false,
-  haveReserve:false,
-  datosReserve:{}
-}
+  haveReserve: false,
+  datosReserve: {},
+};
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.sendRequest:
       return {
         ...state,
-        registro: true
-      }
+        registro: true,
+      };
     case types.resetRegister:
       return {
         ...state,
-        registro: false
-      }
+        registro: false,
+      };
     case types.login: {
       return {
         ...state,
         info: action.payload,
-        active: true
-      }
+        active: true,
+      };
     }
     case types.logout: {
-      return initialState
+      return initialState;
     }
     case types.editProfileOn: {
       return {
         ...state,
-        editMode: true
-      }
+        editMode: true,
+      };
     }
     case types.uploadImg: {
       return {
         ...state,
-        foto: action.payload
-      }
+        foto: action.payload,
+      };
     }
     case types.updateProfile: {
       return {
@@ -64,76 +63,76 @@ export const authReducer = (state = initialState, action) => {
         info: {
           ...state.info,
           telefono: action.payload.telefono,
-          email: action.payload.email
+          email: action.payload.email,
         },
-        editMode: false
-      }
+        editMode: false,
+      };
     }
     case types.cancelUpdate: {
       return {
         ...state,
-        editMode: false
-      }
+        editMode: false,
+      };
     }
     case types.finishChecking: {
       return {
         ...state,
-        checking: false
-      }
+        checking: false,
+      };
     }
     case types.cancelChangePass: {
       return {
         ...state,
-        changePass: false
-      }
+        changePass: false,
+      };
     }
     case types.startChangePass: {
       return {
         ...state,
-        changePass: true
-      }
+        changePass: true,
+      };
     }
     case types.editImg: {
       return {
         ...state,
         info: {
           ...state.info,
-          foto: action.payload
-        }
-      }
+          foto: action.payload,
+        },
+      };
     }
     case types.setEstadoFinanciero: {
       return {
         ...state,
-        info:{
+        info: {
           ...state.info,
-          estado_financiero:action.payload
-        }
-      }
+          estado_financiero: action.payload,
+        },
+      };
     }
 
-    case types.setPagos:{
+    case types.setPagos: {
       return {
         ...state,
-        pagos: action.payload
-      }
+        pagos: action.payload,
+      };
     }
-    case types.setReserveHour:{
+    case types.setReserveHour: {
       return {
         ...state,
         haveReserve: true,
-        datosReserve: action.payload
-      }
+        datosReserve: action.payload,
+      };
     }
-    case types.deleteReserveHour:{
+    case types.deleteReserveHour: {
       return {
         ...state,
         haveReserve: false,
-        datosReserve: {}
-      }
+        datosReserve: {},
+      };
     }
 
     default:
-      return state
+      return state;
   }
-}
+};
