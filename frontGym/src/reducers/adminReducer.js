@@ -7,6 +7,7 @@ const initialState = {
   payRequest: [],
   schedules: [],
   blockHours: [],
+  routinesRequest: [],
 };
 
 export const adminReducer = (state = initialState, action) => {
@@ -91,6 +92,18 @@ export const adminReducer = (state = initialState, action) => {
         ...state,
         blockHours: state.blockHours.filter(
           (p) => p.id_bloqueo_hora !== action.payload
+        ),
+      };
+    case types.getRoutinesRequest:
+      return {
+        ...state,
+        routinesRequest: action.payload,
+      };
+    case types.removeRequestRoutine:
+      return {
+        ...state,
+        routinesRequest: state?.routinesRequest.filter(
+          (p) => p.id_rutina !== action.payload
         ),
       };
     default:

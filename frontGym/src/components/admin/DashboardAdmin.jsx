@@ -21,6 +21,7 @@ export const DashboardAdmin = () => {
     { nombre: "Mensajeria", to: "message", icon: "fas fa-envelope" },
     { nombre: "Horarios", to: "schedules", icon: "fas fa-clock" },
     { nombre: "Ver reservas", to: "reserves", icon: "fas fa-calendar-check" },
+    { nombre: "Revisión rutinas", to: "routines", icon: "fas fa-check" },
   ];
 
   return (

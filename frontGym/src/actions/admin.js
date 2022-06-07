@@ -328,6 +328,46 @@ export const getReserves = (date) => {
   };
 };
 
+export const getRoutinesRequest = () => {
+  return async (dispatch) => {
+    const resp = await fetchConToken(
+      "http://localhost:4000/api/admin/routines"
+    );
+    const body = await resp.json();
+    if (body.ok) {
+      dispatch(obtainRoutinesRequest(body.response));
+    } else {
+      alertSwal(false, body.msg, 2000);
+    }
+  };
+};
+
+const obtainRoutinesRequest = (datos) => ({
+  type: types.getRoutinesRequest,
+  payload: datos,
+});
+
+export const proccessRoutine = (data) => {
+  return async (dispatch) => {
+    const resp = await fetchConToken(
+      "http://localhost:4000/api/admin/routines",
+      data,
+      "PUT"
+    );
+    const body = await resp.json();
+    console.log(body);
+    if (body.ok) {
+      alertSwal(true, body?.msg, 2000);
+      dispatch(removeRoutineRequest(data?.id));
+    }
+  };
+};
+
+const removeRoutineRequest = (id) => ({
+  type: types.removeRequestRoutine,
+  payload: id,
+});
+
 // endpoint personal
 export const sendRoutine = (data) => {
   return async () => {

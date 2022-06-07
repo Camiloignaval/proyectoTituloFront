@@ -48,4 +48,6 @@ export const types = {
   deleteReserveHour: "delete hour by client",
 
   sendRoutinePetition: "send routine petition",
+  getRoutinesRequest: "get routines request",
+  removeRequestRoutine: "remove request routine",
 };
