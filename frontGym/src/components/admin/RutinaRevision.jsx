@@ -57,7 +57,6 @@ export const RutinaRevision = ({ datos }) => {
               <div class="modal-body">
                 {datos?.ejercicios.map((ejercicio, i) => {
                   if (ejercicio.length > 0) {
-                    console.log(ejercicio);
                     return (
                       <div id="accordion" className="mb-4 ">
                         <button

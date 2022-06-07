@@ -50,4 +50,5 @@ export const types = {
   sendRoutinePetition: "send routine petition",
   getRoutinesRequest: "get routines request",
   removeRequestRoutine: "remove request routine",
+  getRoutines: "get routines",
 };

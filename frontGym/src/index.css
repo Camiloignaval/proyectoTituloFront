@@ -169,3 +169,12 @@ input {
 .modal-body div p {
   color: black !important;
 }
+
+.contenedorEjercicios {
+  background: rgb(255, 252, 0);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 251, 0, 0.116) 0%,
+    rgba(0, 212, 255, 0) 100%
+  );
+}

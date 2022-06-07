@@ -21,6 +21,7 @@ const initialState = {
   changePass: false,
   haveReserve: false,
   datosReserve: {},
+  rutinasDisponibles: [],
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -129,6 +130,12 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         haveReserve: false,
         datosReserve: {},
+      };
+    }
+    case types.getRoutines: {
+      return {
+        ...state,
+        rutinasDisponibles: action.payload,
       };
     }
 
