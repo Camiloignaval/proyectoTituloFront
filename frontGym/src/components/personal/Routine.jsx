@@ -20,16 +20,17 @@ export const Routine = () => {
   } = useSelector((state) => state.user);
   const [infoRoutine, setinfoRoutine] = useState({});
   const [level, setLevel] = useState("");
+  const [name, setName] = useState("");
   const [isEnableSend, setisEnableSend] = useState(false);
   const dispatch = useDispatch();
   const [reset, setReset] = useState(false);
   //   ACTIVAR BOTON CUANDO HAYA UN REGISTRO
   useEffect(() => {
     const isMoreThan1Register = Object.keys(infoRoutine).length >= 1;
-    isMoreThan1Register && level !== ""
+    isMoreThan1Register && level !== "" && name !== ""
       ? setisEnableSend(true)
       : setisEnableSend(false);
-  }, [infoRoutine, level]);
+  }, [infoRoutine, level, name]);
 
   const handleSendRoutine = async () => {
     let array = [];
@@ -44,10 +45,12 @@ export const Routine = () => {
           id_entrenador: id_usuario,
           nivel: level,
           info: Object.values(infoRoutine),
+          name,
         })
       );
       if (data?.ok) {
         //   resetear forms
+        setName("");
         setReset(true);
         setinfoRoutine({});
         setLevel("");
@@ -61,6 +64,25 @@ export const Routine = () => {
       <h1 className="text-center">Nueva rutina</h1>
 
       <div className="diasSemana pl-4">
+        <div class="input-group mb-4 mt-4">
+          <div class="input-group-prepend">
+            <span
+              style={{ width: "100px" }}
+              class="input-group-text"
+              id="basic-addon1"
+            >
+              Nombre
+            </span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            max={20}
+            placeholder="Nombre rutina"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+          />
+        </div>
         <div className="selectNivel mb-5">
           <h5 style={{ display: "inline" }}>Seleccione nivel:</h5>
           <select
@@ -77,6 +99,7 @@ export const Routine = () => {
             <option value={3}>Avanzada</option>
           </select>
         </div>
+
         {diasSemana.map((dia, index) => (
           <DiaRoutina
             reset={reset}

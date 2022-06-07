@@ -23,13 +23,13 @@ export const RutinaRevision = ({ datos }) => {
         <button
           className="btn btn-info"
           data-toggle="modal"
-          data-target="#exampleModal"
+          data-target={`#exampleModal${datos?.id_rutina}`}
         >
           Ver detalles
         </button>
         <div
           class="modal fade"
-          id="exampleModal"
+          id={`exampleModal${datos?.id_rutina}`}
           tabindex="-1"
           role="dialog"
           aria-labelledby="exampleModalLabel"
