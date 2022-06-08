@@ -13,6 +13,7 @@ const initialState = {
     foto: null,
     telefono: null,
     estado_financiero: null,
+    id_rutina: null,
   },
   pagos: [],
   active: false,
@@ -136,6 +137,32 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         rutinasDisponibles: action.payload,
+      };
+    }
+    case types.deleteButtonDeleteRequest: {
+      return {
+        ...state,
+        rutinasDisponibles: state.rutinasDisponibles.map((r) => {
+          if (r.id_rutina === action.payload) {
+            return { ...r, fechaSolEliminacion: new Date() };
+          } else {
+            return r;
+          }
+        }),
+      };
+    }
+    case types.deleteRoutine: {
+      return {
+        ...state,
+        rutinasDisponibles: state.rutinasDisponibles.filter(
+          (r) => r?.id_rutina !== action.payload
+        ),
+      };
+    }
+    case types.activateRutine: {
+      return {
+        ...state,
+        info: { ...state.info, id_rutina: action.payload },
       };
     }
 

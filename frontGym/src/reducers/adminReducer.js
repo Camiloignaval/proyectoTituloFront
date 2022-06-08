@@ -106,6 +106,17 @@ export const adminReducer = (state = initialState, action) => {
           (p) => p.id_rutina !== action.payload
         ),
       };
+    case types.changeLvl:
+      return {
+        ...state,
+        clientes: state?.clientes.map((c) => {
+          if (p.id_usuario == action.payload.id_usuario) {
+            p.nivel = action.payload.nivel;
+            return c;
+          }
+          return c;
+        }),
+      };
     default:
       return state;
   }

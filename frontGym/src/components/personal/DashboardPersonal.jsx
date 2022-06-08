@@ -6,7 +6,8 @@ export const DashboardPersonal = () => {
   const itemsSidebar = [
     { nombre: "Perfil", to: "perfil", icon: "fas fa-address-card" },
     { nombre: "Mensajeria", to: "message", icon: "fas fa-envelope" },
-    { nombre: "Nueva rutina", to: "routine", icon: "fas fa-dumbbell" },
+    { nombre: "Nueva rutina", to: "routine", icon: "fas fa-plus" },
+    { nombre: "Rutinas", to: "routs", icon: "fas fa-dumbbell" },
   ];
   return (
     <div>

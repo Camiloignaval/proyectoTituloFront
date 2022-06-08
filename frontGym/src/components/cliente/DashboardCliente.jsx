@@ -10,6 +10,7 @@ export const DashboardCliente = () => {
     { nombre: "Mensajeria", to: "message", icon: "fas fa-envelope" },
     { nombre: "Reservas", to: "reservas", icon: "fas fa-clock" },
     { nombre: "Rutinas", to: "routs", icon: "fas fa-dumbbell" },
+    { nombre: "Mi rutina", to: "myroutine", icon: "fas fa-dumbbell" },
   ];
   return (
     <div>

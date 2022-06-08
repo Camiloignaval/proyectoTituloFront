@@ -385,3 +385,25 @@ export const sendRoutine = (data) => {
     return body;
   };
 };
+
+export const changeLvL = (data) => {
+  return async (dispatch) => {
+    const resp = await fetchConToken(
+      "http://localhost:4000/api/admin/changelevel",
+      data,
+      "PUT"
+    );
+    const body = await resp.json();
+    if (body.ok) {
+      alertSwal(true, body.msg, 2000);
+      dispatch(changeLvLCliente(data));
+    } else {
+      alertSwal(false, "Ha ocurrido un error", 2000);
+    }
+    return body;
+  };
+};
+const changeLvLCliente = (datos) => ({
+  type: types.changeLvl,
+  payload: datos,
+});

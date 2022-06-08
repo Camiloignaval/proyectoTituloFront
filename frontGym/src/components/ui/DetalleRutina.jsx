@@ -1,5 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  deleteRoutine,
+  deleteRoutineRequest,
+  selectRoutine,
+} from "../../actions/auth";
 
 const dias = {
   1: "Lunes",
@@ -12,11 +17,38 @@ const dias = {
 };
 
 const arrayNivel = { 1: "Principiante", 2: "Intermedio", 3: "Avanzado" };
-export const DetalleRutina = ({ rutina }) => {
+export const DetalleRutina = ({ rutina, isSelected = false }) => {
   const {
-    info: { id_cargo },
+    info: { id_cargo, id_usuario },
   } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
+  const handleRequestDelete = () => {
+    dispatch(
+      deleteRoutineRequest({
+        id_rutina: rutina?.id_rutina,
+        id_entrenador: id_usuario,
+      })
+    );
+  };
+
+  const handleDeleteRoutine = () => {
+    dispatch(
+      deleteRoutine({
+        id_rutina: rutina?.id_rutina,
+        id_solicitud: rutina?.id_solicitud,
+      })
+    );
+  };
+
+  const handleSelectActiveRutine = () => {
+    dispatch(
+      selectRoutine({
+        id_rutina: rutina?.id_rutina,
+        id_usuario: id_usuario,
+      })
+    );
+  };
   return (
     <div>
       {rutina?.ejercicios?.length > 0 &&
@@ -28,7 +60,7 @@ export const DetalleRutina = ({ rutina }) => {
                   {i == 0 && (
                     <>
                       <button
-                        class="btn btn-link"
+                        className="btn btn-link"
                         data-toggle="collapse"
                         data-target={`#collapse${rutina?.id_rutina}`}
                         aria-expanded="true"
@@ -37,18 +69,36 @@ export const DetalleRutina = ({ rutina }) => {
                       >
                         {rutina?.nombre} Nivel {arrayNivel[rutina?.nivel]}
                       </button>
-                      {id_cargo === 1 && (
-                        <button class="btn btn-danger float-right">
-                          Eliminar
-                        </button>
-                      )}
-                      {id_cargo === 2 && (
-                        <button class="btn btn-danger float-right">
-                          Solicitar eliminación
-                        </button>
-                      )}
-                      {id_cargo === 3 && (
-                        <button class="btn btn-success float-right">
+                      {!isSelected &&
+                        id_cargo === 1 &&
+                        rutina?.fechaSolEliminacion !== null && (
+                          <button
+                            onClick={handleDeleteRoutine}
+                            className="btn btn-danger float-right"
+                          >
+                            Eliminar rutina
+                          </button>
+                        )}
+                      {!isSelected &&
+                        id_cargo === 2 &&
+                        (rutina?.fechaSolEliminacion === null ||
+                        rutina?.resolucion === false ? (
+                          <button
+                            onClick={handleRequestDelete}
+                            className="btn btn-danger float-right"
+                          >
+                            Solicitar eliminación
+                          </button>
+                        ) : (
+                          <button disabled className="btn btn-info float-right">
+                            Solicitud de eliminación en proceso
+                          </button>
+                        ))}
+                      {!isSelected && id_cargo === 3 && (
+                        <button
+                          onClick={handleSelectActiveRutine}
+                          className="btn btn-success float-right"
+                        >
                           Seleccionar como rutina activa
                         </button>
                       )}
@@ -60,7 +110,7 @@ export const DetalleRutina = ({ rutina }) => {
                     aria-labelledby="headingOne"
                     data-parent="#accordion"
                   >
-                    <h5 class="ml-4 mt-4">{dias[i + 1]}</h5>
+                    <h5 className="ml-4 mt-4">{dias[i + 1]}</h5>
                     <div>
                       {ejercicio.map((ejercicio) => (
                         <div

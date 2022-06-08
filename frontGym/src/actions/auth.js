@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import { alertSwal } from "../helpers/swal";
 import { fetchConToken, fetchSinToken } from "../hooks/fetch";
 import { types } from "../types/types";
 
@@ -237,7 +238,77 @@ export const startViewRoutines = () => {
   };
 };
 
+export const deleteRoutineRequest = (data) => {
+  return async (dispatch) => {
+    const resp = await fetchConToken(
+      `http://localhost:4000/api/auth/routine`,
+      data,
+      "PUT"
+    );
+    const body = await resp.json();
+    if (body.ok) {
+      dispatch(deleteButtonDeleteRequest(data?.id_rutina));
+      alertSwal(true, body.msg);
+    } else {
+      Swal.fire("oh oh!", body.msg, "error");
+    }
+  };
+};
+
+const deleteButtonDeleteRequest = (data) => ({
+  type: types.deleteButtonDeleteRequest,
+  payload: data,
+});
+
 const getRoutines = (rutinas) => ({
   type: types.getRoutines,
   payload: rutinas,
+});
+
+export const deleteRoutine = (data) => {
+  return async (dispatch) => {
+    const resp = await fetchConToken(
+      `http://localhost:4000/api/auth/routine`,
+      data,
+      "DELETE"
+    );
+    const body = await resp.json();
+    if (body.ok) {
+      dispatch(deleteRoutineAct(data?.id_rutina));
+      alertSwal(true, body.msg);
+    } else {
+      Swal.fire("oh oh!", body.msg, "error");
+    }
+  };
+};
+
+const deleteRoutineAct = (id) => ({
+  type: types.deleteRoutine,
+  payload: id,
+});
+export const selectRoutine = (data) => {
+  return async (dispatch) => {
+    const resp = await fetchConToken(
+      `http://localhost:4000/api/user/routine`,
+      data,
+      "put"
+    );
+    const body = await resp.json();
+    if (body.ok) {
+      dispatch(selectRoutineActive(data?.id_rutina));
+      dispatch(activarRutina(data?.id_rutina));
+      alertSwal(true, body.msg);
+    } else {
+      Swal.fire("oh oh!", body.msg, "error");
+    }
+  };
+};
+
+const selectRoutineActive = (id) => ({
+  type: types.deleteRoutine,
+  payload: id,
+});
+const activarRutina = (id) => ({
+  type: types.activateRutine,
+  payload: id,
 });

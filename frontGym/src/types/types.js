@@ -51,4 +51,9 @@ export const types = {
   getRoutinesRequest: "get routines request",
   removeRequestRoutine: "remove request routine",
   getRoutines: "get routines",
+  deleteButtonDeleteRequest: "delete button delete request",
+  deleteRoutine: "delete routine",
+  selectActiveRoutine: "select active routine",
+  activateRutine: "activate routine",
+  changeLvLCliente: "change lvL cliente",
 };

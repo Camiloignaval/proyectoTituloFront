@@ -4,6 +4,7 @@ import { DashboardCliente } from "../components/cliente/DashboardCliente";
 import { EstadoFinanciero } from "../components/cliente/EstadoFinanciero";
 import { RegistrarPago } from "../components/cliente/RegistrarPago";
 import { Reservas } from "../components/cliente/Reservas";
+import { RutinaSeleccionada } from "../components/cliente/RutinaSeleccionada";
 import { ListaRutinas } from "../components/ui/ListaRutinas";
 import { Mensajeria } from "../components/ui/Mensajeria";
 import { Profile } from "../components/ui/Profile";
@@ -18,6 +19,7 @@ export const UserRoutes = () => {
         <Route path="estado" element={<EstadoFinanciero />} />
         <Route path="reservas" element={<Reservas />} />
         <Route path="routs" element={<ListaRutinas />} />
+        <Route path="myroutine" element={<RutinaSeleccionada />} />
         <Route path="*" element={<Navigate to="/user" />} />
       </Route>
       <Route path="*" element={<Navigate to="/user" />} />
