@@ -101,7 +101,7 @@ export const Cliente = ({ cliente: c }) => {
     if (formValues) {
       Swal.fire(JSON.stringify("Mensaje enviado"));
       await fetchConToken(
-        "http://localhost:4000/api/msg/send",
+        baseApi + "api/msg/send",
         {
           tipo: "recordatorio",
           mensaje: formValues[1],

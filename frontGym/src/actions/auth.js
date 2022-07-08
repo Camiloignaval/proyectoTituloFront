@@ -1,15 +1,12 @@
 import Swal from "sweetalert2";
+import { baseApi } from "../helpers/baseApi";
 import { alertSwal } from "../helpers/swal";
 import { fetchConToken, fetchSinToken } from "../hooks/fetch";
 import { types } from "../types/types";
 
 export const startRegister = (datos) => {
   return async (dispatch) => {
-    const resp = await fetchSinToken(
-      "http://localhost:4000/api/auth/user",
-      datos,
-      "POST"
-    );
+    const resp = await fetchSinToken(baseApi + "api/auth/user", datos, "POST");
     const body = await resp.json();
     if (body.ok) {
       dispatch(enviarSolicitud());
@@ -30,11 +27,7 @@ const enviarSolicitud = () => ({
 
 export const startLogin = (datos) => {
   return async (dispatch) => {
-    const resp = await fetchSinToken(
-      "http://localhost:4000/api/auth/",
-      datos,
-      "POST"
-    );
+    const resp = await fetchSinToken(baseApi + "api/auth/", datos, "POST");
     const body = await resp.json();
     if (body.ok) {
       dispatch(login(body.data));
@@ -47,7 +40,7 @@ export const startLogin = (datos) => {
 
 export const startCheking = () => {
   return async (dispatch) => {
-    const resp = await fetchConToken("http://localhost:4000/api/auth/renew/");
+    const resp = await fetchConToken(baseApi + "api/auth/renew/");
     const body = await resp.json();
 
     if (body.ok) {
@@ -93,7 +86,7 @@ const editProfile = () => ({
 export const startUploadImg = (datos) => {
   return async (dispatch) => {
     const resp = await fetchConToken(
-      "http://localhost:4000/api/auth/imgPerfil/",
+      baseApi + "api/auth/imgPerfil/",
       datos,
       "PUT"
     );
@@ -120,11 +113,7 @@ const uploadImg = (url) => ({
 
 export const startUpdateProfile = (data) => {
   return async (dispatch) => {
-    const resp = await fetchConToken(
-      "http://localhost:4000/api/auth/user/",
-      data,
-      "PUT"
-    );
+    const resp = await fetchConToken(baseApi + "api/auth/user/", data, "PUT");
     const body = await resp.json();
 
     if (body.ok) {
@@ -153,7 +142,7 @@ export const cancelEdit = () => (dispatch) =>
 export const startBajaCuenta = (data) => {
   return async (dispatch) => {
     const resp = await fetchConToken(
-      `http://localhost:4000/api/auth/user/`,
+      `${baseApi}api/auth/user/`,
       data,
       "DELETE"
     );
@@ -181,11 +170,7 @@ export const endChangePass = () => (dispatch) =>
 
 export const sendChangePass = (data) => {
   return async (dispatch) => {
-    const resp = await fetchConToken(
-      "http://localhost:4000/api/auth/pass",
-      data,
-      "PUT"
-    );
+    const resp = await fetchConToken(baseApi + "api/auth/pass", data, "PUT");
     const body = await resp.json();
     if (body.ok) {
       Swal.fire({
@@ -206,7 +191,7 @@ export const sendChangePass = (data) => {
 export const sendMessage = (data) => {
   return async (dispatch) => {
     const resp = await fetchConToken(
-      "http://localhost:4000/api/msg/intercambioMsg",
+      baseApi + "api/msg/intercambioMsg",
       data,
       "POST"
     );
@@ -228,7 +213,7 @@ export const sendMessage = (data) => {
 
 export const startViewRoutines = () => {
   return async (dispatch) => {
-    const resp = await fetchConToken(`http://localhost:4000/api/auth/routine`);
+    const resp = await fetchConToken(`${baseApi}api/auth/routine`);
     const body = await resp.json();
     if (body.ok) {
       dispatch(getRoutines(body.response));
@@ -240,11 +225,7 @@ export const startViewRoutines = () => {
 
 export const deleteRoutineRequest = (data) => {
   return async (dispatch) => {
-    const resp = await fetchConToken(
-      `http://localhost:4000/api/auth/routine`,
-      data,
-      "PUT"
-    );
+    const resp = await fetchConToken(`${baseApi}api/auth/routine`, data, "PUT");
     const body = await resp.json();
     if (body.ok) {
       dispatch(deleteButtonDeleteRequest(data?.id_rutina));
@@ -268,7 +249,7 @@ const getRoutines = (rutinas) => ({
 export const deleteRoutine = (data) => {
   return async (dispatch) => {
     const resp = await fetchConToken(
-      `http://localhost:4000/api/auth/routine`,
+      `${baseApi}api/auth/routine`,
       data,
       "DELETE"
     );
@@ -288,11 +269,7 @@ const deleteRoutineAct = (id) => ({
 });
 export const selectRoutine = (data) => {
   return async (dispatch) => {
-    const resp = await fetchConToken(
-      `http://localhost:4000/api/user/routine`,
-      data,
-      "put"
-    );
+    const resp = await fetchConToken(`${baseApi}api/user/routine`, data, "put");
     const body = await resp.json();
     if (body.ok) {
       dispatch(selectRoutineActive(data?.id_rutina));

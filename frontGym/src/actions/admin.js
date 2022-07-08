@@ -1,14 +1,14 @@
 /* eslint-disable camelcase */
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { baseApi } from "../helpers/baseApi";
 import { alertSwal } from "../helpers/swal";
 import { fetchConToken } from "../hooks/fetch";
 import { types } from "../types/types";
+
 export const startViewPending = () => {
   return async (dispatch) => {
-    const resp = await fetchConToken(
-      "http://localhost:4000/api/admin/requests"
-    );
+    const resp = await fetchConToken(baseApi + "api/admin/requests");
     const data = await resp.json();
     dispatch(viewPending(data.datos));
   };
@@ -21,7 +21,7 @@ const viewPending = (datos) => ({
 
 export const startViewClients = () => {
   return async (dispatch) => {
-    const resp = await fetchConToken("http://localhost:4000/api/admin/user");
+    const resp = await fetchConToken(baseApi + "api/admin/user");
     const data = await resp.json();
     dispatch(viewClients(data.datos));
   };
@@ -36,7 +36,7 @@ export const startResponseRequest = (data) => {
   console.log(data);
   return async (dispatch) => {
     const resp = await fetchConToken(
-      "http://localhost:4000/api/admin/requests",
+      baseApi + "api/admin/requests",
       data,
       "PUT"
     );
@@ -65,11 +65,7 @@ const aceptRequest = (datos) => ({
 
 export const startToggleBlock = (datos) => {
   return async (dispatch) => {
-    const resp = await fetchConToken(
-      "http://localhost:4000/api/admin/block",
-      datos,
-      "PUT"
-    );
+    const resp = await fetchConToken(baseApi + "api/admin/block", datos, "PUT");
     const body = await resp.json();
     if (body.ok) {
       if (datos.bloquear) {
@@ -97,7 +93,7 @@ const unblockUser = (datos) => ({
 export const startPagoPresencial = (datos) => {
   return async (dispatch) => {
     const resp = await fetchConToken(
-      "http://localhost:4000/api/admin/pagopresencial",
+      baseApi + "api/admin/pagopresencial",
       datos,
       "PUT"
     );
@@ -119,9 +115,7 @@ export const startPagoPresencial = (datos) => {
 };
 export const startPayRequest = () => {
   return async (dispatch) => {
-    const resp = await fetchConToken(
-      "http://localhost:4000/api/admin/payrequest"
-    );
+    const resp = await fetchConToken(baseApi + "api/admin/payrequest");
     const body = await resp.json();
     if (body.ok) {
       dispatch(listaPagos(body.datos));
@@ -141,7 +135,7 @@ export const payValidation = (data) => {
   const { id_pago } = data;
   return async (dispatch) => {
     const resp = await fetchConToken(
-      "http://localhost:4000/api/admin/validatePay",
+      baseApi + "api/admin/validatePay",
       { idPago: id_pago },
       "PUT"
     );
@@ -170,9 +164,7 @@ const validatePay = (datos) => ({
 
 export const emailAtrasados = () => {
   return async () => {
-    const resp = await fetchConToken(
-      "http://localhost:4000/api/admin/pagosatrasados"
-    );
+    const resp = await fetchConToken(baseApi + "api/admin/pagosatrasados");
     const body = await resp.json();
     if (body.ok) {
       Swal.fire({
@@ -192,7 +184,7 @@ export const emailAtrasados = () => {
 export const guardarHorarios = (data) => {
   return async () => {
     const resp = await fetchConToken(
-      "http://localhost:4000/api/admin/schedules",
+      baseApi + "api/admin/schedules",
       data,
       "POST"
     );
@@ -213,9 +205,7 @@ export const guardarHorarios = (data) => {
 };
 export const obtenerHorarios = () => {
   return async (dispatch) => {
-    const resp = await fetchConToken(
-      "http://localhost:4000/api/admin/schedules"
-    );
+    const resp = await fetchConToken(baseApi + "api/admin/schedules");
     const body = await resp.json();
     if (body.ok) {
       dispatch(savedSchedules(body.response));
@@ -233,7 +223,7 @@ const savedSchedules = (datos) => ({
 export const guardarCausas = (data) => {
   return async () => {
     const resp = await fetchConToken(
-      "http://localhost:4000/api/admin/hoursblock",
+      baseApi + "api/admin/hoursblock",
       data,
       "POST"
     );
@@ -255,9 +245,7 @@ export const guardarCausas = (data) => {
 };
 export const obtenerCausas = (data) => {
   return async (dispatch) => {
-    const resp = await fetchConToken(
-      "http://localhost:4000/api/admin/hoursblock"
-    );
+    const resp = await fetchConToken(baseApi + "api/admin/hoursblock");
     const body = await resp.json();
     if (body.ok) {
       dispatch(obtainHorasBloqueadas(body.response));
@@ -271,7 +259,7 @@ export const obtenerCausas = (data) => {
 export const eliminarCausa = (data) => {
   return async (dispatch) => {
     const resp = await fetchConToken(
-      "http://localhost:4000/api/admin/hoursblock",
+      baseApi + "api/admin/hoursblock",
       data,
       "DELETE"
     );
@@ -299,7 +287,7 @@ const deleteHorasBloqueadas = (datos) => ({
 export const consultAssistance = (rut) => {
   return async () => {
     const resp = await fetchConToken(
-      "http://localhost:4000/api/admin/consultassistance",
+      baseApi + "api/admin/consultassistance",
       { rut },
       "POST"
     );
@@ -316,9 +304,7 @@ export const consultAssistance = (rut) => {
 
 export const getReserves = (date) => {
   return async () => {
-    const resp = await fetchConToken(
-      `http://localhost:4000/api/admin/reserves${date}`
-    );
+    const resp = await fetchConToken(`${baseApi}api/admin/reserves${date}`);
     const body = await resp.json();
     if (body.ok) {
     } else {
@@ -330,9 +316,7 @@ export const getReserves = (date) => {
 
 export const getRoutinesRequest = () => {
   return async (dispatch) => {
-    const resp = await fetchConToken(
-      "http://localhost:4000/api/admin/routines"
-    );
+    const resp = await fetchConToken(baseApi + "api/admin/routines");
     const body = await resp.json();
     if (body.ok) {
       dispatch(obtainRoutinesRequest(body.response));
@@ -350,7 +334,7 @@ const obtainRoutinesRequest = (datos) => ({
 export const proccessRoutine = (data) => {
   return async (dispatch) => {
     const resp = await fetchConToken(
-      "http://localhost:4000/api/admin/routines",
+      baseApi + "api/admin/routines",
       data,
       "PUT"
     );
@@ -372,7 +356,7 @@ const removeRoutineRequest = (id) => ({
 export const sendRoutine = (data) => {
   return async () => {
     const resp = await fetchConToken(
-      "http://localhost:4000/api/personal/routine",
+      baseApi + "api/personal/routine",
       data,
       "POST"
     );
@@ -389,7 +373,7 @@ export const sendRoutine = (data) => {
 export const changeLvL = (data) => {
   return async (dispatch) => {
     const resp = await fetchConToken(
-      "http://localhost:4000/api/admin/changelevel",
+      baseApi + "api/admin/changelevel",
       data,
       "PUT"
     );

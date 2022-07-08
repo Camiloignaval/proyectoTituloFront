@@ -42,6 +42,10 @@ export const DetalleRutina = ({ rutina, isSelected = false }) => {
   };
 
   const handleSelectActiveRutine = () => {
+    console.log({
+      id_rutina: rutina?.id_rutina,
+      id_usuario: id_usuario,
+    });
     dispatch(
       selectRoutine({
         id_rutina: rutina?.id_rutina,
